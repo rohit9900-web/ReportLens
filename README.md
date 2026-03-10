@@ -6,7 +6,7 @@ This guide provides the exact steps to install and run ReportLens locally on a W
 
 ---
 
-## ⚙️ Step 1: Install External Windows Software
+##  Step 1: Install External Windows Software
 Because this app processes PDFs and images, you must install two external system tools on the Windows laptop before running any Python code.
 
 ### A. Install Tesseract OCR
@@ -60,3 +60,4 @@ To make this easy for the doctor to use without ever opening a terminal:
 ---
 
 **Note on Data Storage:** *The database (`reportlens_lab.db`) and all temporary PDF storage folders will be generated automatically the very first time a report is uploaded through the dashboard.*
+
