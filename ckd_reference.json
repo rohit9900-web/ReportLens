@@ -1,0 +1,236 @@
+{
+  "COMPLETE BLOOD COUNT": {
+    "HAEMOGLOBIN(HB)": {
+      "expected_units": "gm%",
+      "reference_ranges": [
+        "12.5 - 14.5",
+        "14.5 - 15.5"
+      ]
+    },
+    "TOTAL COUNT": {
+      "expected_units": "cells/cumm",
+      "reference_ranges": "4,000 - 11,000"
+    },
+    
+    "NEUTROPHILS": {
+      "expected_units": "%",
+      "reference_ranges":  "40.00 - 75.00" 
+    },
+    "LYMPHOCYTES": {
+      "expected_units": "%",
+      "reference_ranges": "20.00 - 45.00" 
+    },
+    "MONOCYTES": {
+      "expected_units": "%",
+      "reference_ranges": "2.00 - 10.00" 
+    },
+    "EOSINOPHILS": {
+      "expected_units": "%",
+      "reference_ranges": "1.00 - 6.00" 
+    },
+    "BASOPHILS": {
+      "expected_units": "%",
+      "reference_ranges": "0.00 - 1.00" 
+    },
+    "PLATELET COUNT": {
+      "expected_units": "lakh/cumm",
+      "reference_ranges": "1.50 - 4.50" 
+    },
+    "PACKED CELL VOLUME ( PCV )": {
+      "expected_units": "%",
+      "reference_ranges": "40 - 54" 
+    },
+    "MPV": {
+      "expected_units": "fL",
+      "reference_ranges": "7.20 - 11.70" 
+    },
+    "RBC COUNT": {
+      "expected_units": "mill/cumm",
+      "reference_ranges": "3.50 - 5.50" 
+    },
+    "MCV": {
+      "expected_units": "fL",
+      "reference_ranges": "80.00 - 100.00" 
+    },
+    "MCH": {
+      "expected_units": "pg",
+      "reference_ranges": "26.00 - 34.00" 
+    },
+    "MCHC": {
+      "expected_units": "%",
+      "reference_ranges": "31.00 - 35.00" 
+    },
+    "RDW-CV": {
+      "expected_units": "%",
+      "reference_ranges": "11.50 - 14.00" 
+    }
+  },
+
+  "RFT - RENAL FUNCTION TEST": {
+    "UREA": {
+      "expected_units": "mg/dL",
+      "reference_ranges": "12.00 - 40.00" 
+    },
+    "SERUM CREATININE": {
+      "expected_units": "mg/dL",
+      "reference_ranges": {
+        "Male": "0.66 - 1.25 mg/dL",
+        "Female": "0.52 - 1.04 mg/dL"
+      }
+    },
+    "URIC ACID": {
+      "expected_units": "mg/dL",
+      "reference_ranges": "3.50 - 8.50" 
+    }
+  },
+
+  "ELECTROLYTES": {
+    "SODIUM": {
+      "expected_units": "mEq/L",
+      "reference_ranges": "136.00 - 145.00" 
+    },
+    "POTASSIUM": {
+      "expected_units": "mEq/L",
+      "reference_ranges": "3.50 - 5.10" 
+    },
+    "CHLORIDE": {
+      "expected_units": "mEq/L",
+      "reference_ranges": "98.00 - 111.00" 
+    },
+    "RBS (RANDOM BLOOD SUGER)":{
+      "expected_units": "mg/dL",
+      "reference_ranges": "80.00 - 139.00"
+    },
+    "PHOSPHORUS":{
+      "expected_units": "mg/dL",
+      "reference_ranges": "2.5 - 4.5"
+    }
+    
+  },
+
+  "CRP QUANTITATIVE": {
+    "CRP QUANTITATIVE": {
+      "expected_units": "mg/L",
+      "reference_ranges": "< 5.0 mg/L" 
+    }
+  },
+
+  "TROPONIN I[SERUM]": {
+    "TROPONIN I[SERUM]":{
+      "expected_units": "ng/ml",
+      "reference_ranges": "< 0.3 ng/ml" 
+    }
+  },
+
+  "CALCIUM TOTAL": {
+    "CALCIUM TOTAL": {
+      "expected_units": "mg/L",
+      "reference_ranges": "8.60 - 10.30" 
+    }
+  },
+
+  "GLYCOSYLATED HAEMOGLOBIN": {
+    "GLYCOSYLATED HAEMOGLOBIN": {
+      "expected_units": "%",
+      "reference_ranges": {
+        "Normal (Non Diabetic)": "4 - 6%",
+        "Diabetic Range": "> 6.5%",
+        "Therapeutic Goal": "< 7%",
+        "Diabetic Good Control": "7 - 8%",
+        "Diabetic Unsatisfactory Control": "8 - 10%",
+        "Diabetic Poor Control": "> 10%"
+      }
+    }
+  },
+
+  "LIVER FUNCTION TEST": {
+    "BILIRUBIN TOTAL": {
+      "expected_units": "mg/dL",
+      "reference_ranges": "0.2 - 1.3" 
+    },
+    "BILIRUBIN DIRECT": {
+      "expected_units": "mg/dL",
+      "reference_ranges": "0.0 - 0.3" 
+    },
+    "TOTAL PROTEINS": {
+      "expected_units": "gm/dL",
+      "reference_ranges": "6.00 - 8.30" 
+    },
+    "ALBUMIN": {
+      "expected_units": "gm/dL",
+      "reference_ranges": "3.50 - 5.20" 
+    },
+    "GLOBULIN": {
+      "expected_units": "gm/dL",
+      "reference_ranges": "2.80 - 3.00" 
+    },
+    "AST(SGOT)": {
+      "expected_units": "U/L",
+      "reference_ranges": "< 35" 
+    },
+    "ALT(SGPT)": {
+      "expected_units": "U/L",
+      "reference_ranges": "< 45" 
+    },
+    "ALKALINE PHOSPHATASE (ALP)": {
+      "expected_units": "U/L",
+      "reference_ranges": "38 - 126" 
+    }
+
+  },
+
+  "URINE ROUTINE": {
+    "PHYSICAL EXAMINATION": {
+      "VOLUME": {},
+      "pH": {},
+      "COLOUR": {},
+      "APPEARANCE": {},
+      "SPECIFIC GRAVITY": {}
+    },
+    "CHEMICAL EXAMINATION": {
+      "ALBUMIN": {},
+      "SUGAR": {}
+    },
+    "MICROSCOPIC EXAMINATION": {
+      "RBCs": {
+        "reference_ranges": "0 - 2 /hpf" 
+      },
+      "PUS CELLS": {
+        "reference_ranges": "0 - 5 /hpf" 
+      },
+      "EPITHELIAL": {
+        "reference_ranges": "0 - 5 /hpf" 
+      },
+      "CASTS": {},
+      "CRYSTALS": {},
+      "OTHERS": {}
+    }
+  },
+
+  "ARTERIAL BLOOD GAS ANALYSIS": {
+    "pH": {
+      "reference_ranges": "7.35 - 7.45" 
+    },
+    "pCO2": {
+      "expected_units": "mm Hg",
+      "reference_ranges": "35 - 45" 
+    },
+    "pO2": {
+      "expected_units": "mm Hg",
+      "reference_ranges": "80 - 100" 
+    },
+    "HCO3": {
+      "expected_units": "mEq/L",
+      "reference_ranges": "22 - 26" 
+    },
+    "Hb": {
+      "expected_units": "g/dL",
+      "reference_ranges": "12 - 17" 
+    },
+    "SO2": {
+      "expected_units": "%",
+      "reference_ranges": "90 - 100" 
+    }
+  }
+
+}
