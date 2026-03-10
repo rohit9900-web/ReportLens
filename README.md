@@ -1,4 +1,4 @@
-# 🏥 ReportLens: Medical Intelligence Hub
+#  ReportLens: Medical Intelligence Hub
 
 ReportLens is an automated clinical dashboard designed to extract, process, and securely store patient lab results from PDF reports using OCR and AI.
 
@@ -27,9 +27,9 @@ Because this app processes PDFs and images, you must install two external system
 
 ---
 
-## 📥 Step 2: Download & Setup Python Packages
+##  Step 2: Download & Setup Python Packages
 1. Ensure **Python 3.9 or newer** is installed on the laptop. 
-   * *⚠️ Crucial: During Python installation, make sure to check the box at the bottom that says **"Add Python to PATH"**.*
+   * * Crucial: During Python installation, make sure to check the box at the bottom that says **"Add Python to PATH"**.*
 2. Download the ReportLens project folder to the laptop.
 3. Open the Command Prompt (Terminal) inside the ReportLens folder.
 4. Install all required Python packages by running this command:
@@ -39,7 +39,7 @@ Because this app processes PDFs and images, you must install two external system
 
 ---
 
-## 🔑 Step 3: Configure the AI API Key
+##  Step 3: Configure the AI API Key
 ReportLens requires an API key to process the medical text using AI.
 1. Inside the main ReportLens folder, create a brand new text file and name it exactly `.env`
 2. Open the file in Notepad and paste the following line, replacing the placeholder text with your actual API key:
@@ -50,7 +50,7 @@ ReportLens requires an API key to process the medical text using AI.
 
 ---
 
-## 🚀 Step 4: Create the Desktop Launcher
+##  Step 4: Create the Desktop Launcher
 To make this easy for the doctor to use without ever opening a terminal:
 1. Locate the `Run_ReportLens.bat` file in the main folder.
 2. Right-click it -> **Show more options** -> **Send to** -> **Desktop (create shortcut)**.
@@ -58,4 +58,5 @@ To make this easy for the doctor to use without ever opening a terminal:
 4. **To use the app:** The doctor simply double-clicks the desktop shortcut. The system will boot up in the background and the dashboard will automatically open in their web browser!
 
 ---
+
 **Note on Data Storage:** *The database (`reportlens_lab.db`) and all temporary PDF storage folders will be generated automatically the very first time a report is uploaded through the dashboard.*
