@@ -13,6 +13,10 @@ from db_manager import (
     add_manual_test_record, delete_test_record
 )
 
+# Add this near the top of app.py
+import db_schema
+db_schema.create_tables() # Or whatever your setup function is named
+
 # --- TOP OF FILE: INITIALIZE SESSION STATE ---
 if "file_uploader_key" not in st.session_state:
     st.session_state["file_uploader_key"] = 0
