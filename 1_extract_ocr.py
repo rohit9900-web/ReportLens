@@ -3,13 +3,16 @@ from pdf2image import convert_from_path
 from PIL import Image, ImageOps
 import sys
 import os
+import platform
 
 # 1. Safety Fix: Prevent "DecompressionBomb" crash
 Image.MAX_IMAGE_PIXELS = None
 
 def run_ocr(pdf_path, output_txt):
     # Configure Tesseract Path
-    pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+    if platform.system() == "Windows":
+        pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+# (If it's Linux/Streamlit, we don't need a path because it finds it automatically!)
 
     print(f"Processing: {os.path.basename(pdf_path)}")
     
