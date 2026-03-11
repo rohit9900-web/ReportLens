@@ -785,7 +785,7 @@ if menu == "🏠 Dashboard":
             uploaded_file = st.file_uploader("", type=["pdf"], label_visibility="collapsed", key=f"uploader_{st.session_state['file_uploader_key']}")
             
             if uploaded_file:
-
+                force_rule_based = st.checkbox("⚙️ Force Rule-Based Mode (Test Offline Pipeline)")
                 if st.button("🚀 Run Extraction"):
                     temp = "temp_upload.pdf"
                     with open(temp, "wb") as f: f.write(uploaded_file.getbuffer())
@@ -1128,3 +1128,4 @@ elif menu == "📄 Clinical Reports":
 
 
                     
+
