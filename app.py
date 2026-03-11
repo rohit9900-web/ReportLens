@@ -14,7 +14,6 @@ from db_manager import (
 )
 
 import db_schema
-db_schema.create_tables()
 # (If your db_schema.py has a specific function to build tables, call it too. 
 # Like: db_schema.create_tables() or whatever you named it).
 
@@ -988,31 +987,24 @@ elif menu == "📄 Clinical Reports":
             import os
             file_size_mb = os.path.getsize(pdf_path) / (1024 * 1024)
             
-            if file_size_mb < 2.0:
-                # FAST MODE: If file is small, use your original method
-                with open(pdf_path, "rb") as f:
-                    base64_pdf = base64.b64encode(f.read()).decode('utf-8')
+            # FOOLPROOF CLOUD VIEWER: Convert PDF to images so the browser never blocks it!
+            import fitz  # PyMuPDF
+            import base64
 
-                # 🔥 THE FIX: Using <embed> instead of <iframe> to bypass cloud security blocks
-                viewer_content = f'<embed src="data:application/pdf;base64,{base64_pdf}#toolbar=1&view=FitH" type="application/pdf" width="100%" height="100%" style="flex-grow: 1; border:none;">'
-                
-            else:
-                # LARGE FILE MODE: Convert pages to images so the browser doesn't crash
-                import fitz  # This is PyMuPDF
-                import base64
-                
+            try:
                 doc = fitz.open(pdf_path)
                 img_html = "<div style='overflow-y: auto; height: 100%; width: 100%; background: #525659; text-align: center; padding: 20px 0;'>"
-                
-                # Loop through the PDF and turn each page into a picture
+
                 for page_num in range(len(doc)):
                     page = doc.load_page(page_num)
                     pix = page.get_pixmap(dpi=120) 
                     img_base64 = base64.b64encode(pix.tobytes("png")).decode('utf-8')
                     img_html += f'<img src="data:image/png;base64,{img_base64}" style="max-width: 95%; margin-bottom: 20px; box-shadow: 0px 4px 10px rgba(0,0,0,0.5);"><br>'
-                    
+
                 img_html += "</div>"
                 viewer_content = img_html
+            except Exception as e:
+                viewer_content = f"<div style='padding:20px; color:red; text-align:center;'>Error loading PDF view: {e}</div>"
 
             # --- Inject the chosen viewer into your custom Eye Icon Modal ---
             pdf_html = f"""
@@ -1130,7 +1122,6 @@ elif menu == "📄 Clinical Reports":
                 if st.session_state.get("confirm_delete_rid") == rmap[dk][0]:
                     if st.button("✅ Confirm Delete"): delete_test_record(rmap[dk][0]); del st.session_state["confirm_delete_rid"]; st.rerun()
                     if st.button("❌ Cancel"): del st.session_state["confirm_delete_rid"]; st.rerun()
-
 
 
 
