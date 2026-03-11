@@ -453,7 +453,7 @@ if menu == "🏠 Dashboard":
             #uploaded_file = st.file_uploader("", type=["pdf"], label_visibility="collapsed")
 
             # 👇 Added 'key' using session state
-            uploaded_file = st.file_uploader("", type=["pdf"], label_visibility="collapsed", key=f"uploader_{st.session_state['file_uploader_key']}")
+            uploaded_file = st.file_uploader("Upload PDF", type=["pdf"], label_visibility="collapsed", key=f"uploader_{st.session_state['file_uploader_key']}")
             
             if uploaded_file:
 
@@ -802,6 +802,7 @@ elif menu == "📄 Clinical Reports":
                 if st.session_state.get("confirm_delete_rid") == rmap[dk][0]:
                     if st.button("✅ Confirm Delete"): delete_test_record(rmap[dk][0]); del st.session_state["confirm_delete_rid"]; st.rerun()
                     if st.button("❌ Cancel"): del st.session_state["confirm_delete_rid"]; st.rerun()
+
 
 
 
