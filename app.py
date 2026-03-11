@@ -42,7 +42,7 @@ st.markdown("""
     /* 1. GLOBAL SETTINGS */
     html, body {
         font-family: 'Manrope', sans-serif;
-        color: #0f172a;
+/*        color: #0f172a;  */
         font-size: 16px; 
     }
 
@@ -52,7 +52,7 @@ st.markdown("""
         border-right: 1px solid #334155;
     }
     section[data-testid="stSidebar"] h1, span, p, label {
-        color: #f8fafc !important;
+       /* color: #f8fafc !important; */
     }
 
     /* 3. DASHBOARD CARDS (Fancy Style) */
@@ -80,7 +80,7 @@ st.markdown("""
     .header-item {
         font-size: 14px;
         font-weight: 800;
-        color: #334155;
+       /* color: #334155; */
         text-transform: uppercase;
         letter-spacing: 0.5px;
     }
@@ -115,7 +115,7 @@ st.markdown("""
         padding: 8px 15px;
         font-weight: 800;
         font-size: 14px;
-        color: #475569;
+       /* color: #475569; */
         border-bottom: 1px solid #cbd5e1;
         margin-top: 0px;
     }
@@ -124,7 +124,7 @@ st.markdown("""
     div[data-testid="stButton"] button,
     div[data-testid="stFormSubmitButton"] button {
         background: #2563eb !important; /* Bright Blue */
-        color: white !important;        /* White Text */
+        /*color: white !important; */        /* White Text */
         border: none !important;
         padding: 0.6rem 1.2rem !important;
         border-radius: 8px !important;
@@ -147,7 +147,7 @@ st.markdown("""
         border: 2px solid #3b82f6; 
         padding: 20px;
         border-radius: 10px;
-        color: #0f172a;
+        /*color: #0f172a;*/
     }
     .info-box-contrast h5 { color: #1e40af !important; font-weight: 800; font-size: 20px; }
     .info-box-contrast p { color: #334155 !important; font-size: 18px; }
@@ -162,19 +162,19 @@ st.markdown("""
 
     /* 1. Make TAB Text (Edit, Add, Delete) Dark */
     button[data-baseweb="tab"] div p {
-        color: #0f172a !important; 
+       /* color: #0f172a !important;*/ 
         font-weight: 800 !important;
     }
     
     /* 2. FORCE ALL INPUT LABELS TO BE DARK (Name, Age, Val, Unit, Range) */
     label, label *, div[data-testid="stWidgetLabel"] p {
-        color: #0f172a !important; 
+        /*color: #0f172a !important; */
         font-weight: 800 !important;
     }
 
     /* 3. Make PATIENT HEADER Text (Age, Gender) Dark */
     .patient-header-text {
-        color: #000000 !important;
+        /*color: #000000 !important;*/
         font-weight: 700;
     }
             
@@ -184,7 +184,7 @@ st.markdown("""
     section[data-testid="stSidebar"] label *,
     section[data-testid="stSidebar"] p,
     section[data-testid="stSidebar"] span {
-        color: #ffffff !important;
+        /*color: #ffffff !important;*/
         font-weight: 600 !important;
     }
             
@@ -197,7 +197,7 @@ st.markdown("""
     div[data-testid="stExpander"] summary p,
     div[data-testid="stExpander"] summary span,
     summary p {
-        color: #0f172a !important; /* Dark Blue/Black */
+        /*color: #0f172a !important;*/ /* Dark Blue/Black */
         font-weight: 800 !important;
         font-size: 18px !important;
     }
@@ -205,7 +205,7 @@ st.markdown("""
     /* 2. Force Sidebar Menu Text to be Bright White */
     section[data-testid="stSidebar"] div[data-testid="stRadio"] p,
     section[data-testid="stSidebar"] label p {
-        color: #ffffff !important;
+        /*color: #ffffff !important;*/
         font-weight: 700 !important;
         opacity: 1 !important; /* Removes Streamlit's default dimming */
     }
@@ -217,34 +217,34 @@ st.markdown("""
 
     /* 1. Make TAB Text (Edit, Add, Delete) Dark */
     button[data-baseweb="tab"] * {
-        color: #0f172a !important; 
+        /*color: #0f172a !important;*/ 
         font-weight: 800 !important;
     }
     button[data-baseweb="tab"][aria-selected="true"] * {
-        color: #2563eb !important; 
+        /*color: #2563eb !important; */
     }
     
     /* 2. FORCE ALL INPUT LABELS TO BE DARK (Name, Age, Val, Unit, Range) */
     div[data-testid="stVerticalBlock"] label *, div[data-testid="stForm"] label * {
-        color: #0f172a !important; 
+        /*color: #0f172a !important;*/ 
         font-weight: 800 !important;
     }
 
     /* 3. Make PATIENT HEADER Text (Age, Gender) Dark */
     .patient-header-text, .patient-header-text * {
-        color: #000000 !important;
+        /*color: #000000 !important;*/
         font-weight: 800 !important;
     }
             
     /* 4. FORCE SIDEBAR MENU TEXT BACK TO WHITE */
     section[data-testid="stSidebar"] label * {
-        color: #ffffff !important;
+        /*color: #ffffff !important;*/
         font-weight: 600 !important;
     }
             
     /* 5. Force the Expander Title ("Modify Records") to be Dark */
     div[data-testid="stExpander"] summary * {
-        color: #0f172a !important; 
+        /* color: #0f172a !important; */
         font-weight: 800 !important;
     }
             
@@ -262,7 +262,7 @@ st.markdown("""
     .tbl-name .tooltiptext {
         visibility: hidden;
         background-color: #374151; /* Dark gray exactly like your screenshot */
-        color: #ffffff !important;
+        /* color: #ffffff !important;*/
         text-align: center;
         border-radius: 6px;
         padding: 6px 12px;
@@ -299,7 +299,7 @@ st.markdown("""
     /* 2. Format the "SYSTEM ADMIN" title */
     .stSidebar [data-testid="stExpander"] summary p {
         font-size: 15px !important;
-        color: #94a3b8 !important;
+        /*color: #94a3b8 !important;*/
         text-transform: uppercase;
         font-weight: bold;
     }
@@ -318,7 +318,7 @@ st.markdown("""
         background-color: transparent !important; 
         border: none !important;                  
         box-shadow: none !important;              
-        color: #cbd5e1 !important;                
+       /* color: #cbd5e1 !important; */                
         justify-content: flex-start !important;   
         text-align: left !important;
         width: 100% !important;
@@ -331,7 +331,7 @@ st.markdown("""
     /* 5. Subtle hover effect for the list items */
     .stSidebar [data-testid="stExpanderDetails"] button:hover {
         background-color: rgba(255, 255, 255, 0.08) !important; 
-        color: #ffffff !important;
+       /* color: #ffffff !important; */
         border-radius: 4px !important;
     }
 
@@ -614,8 +614,6 @@ elif menu == "👥 Patient Registry":
                         st.rerun()
 
                       
-
-
 # =========================================================
 # 3. CLINICAL REPORTS (FORMAL TABLE DESIGN)
 # =========================================================
