@@ -14,6 +14,7 @@ from db_manager import (
 )
 
 import db_schema
+db_schema.create_tables()
 # (If your db_schema.py has a specific function to build tables, call it too. 
 # Like: db_schema.create_tables() or whatever you named it).
 
@@ -802,6 +803,7 @@ elif menu == "📄 Clinical Reports":
                 if st.session_state.get("confirm_delete_rid") == rmap[dk][0]:
                     if st.button("✅ Confirm Delete"): delete_test_record(rmap[dk][0]); del st.session_state["confirm_delete_rid"]; st.rerun()
                     if st.button("❌ Cancel"): del st.session_state["confirm_delete_rid"]; st.rerun()
+
 
 
 
