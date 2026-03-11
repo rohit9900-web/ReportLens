@@ -12,7 +12,7 @@ from db_manager import (
     delete_patient_completely, update_test_record, 
     add_manual_test_record, delete_test_record
 )
-
+import io;
 import db_schema
 db_schema.create_tables()
 # (If your db_schema.py has a specific function to build tables, call it too. 
@@ -791,6 +791,7 @@ if menu == "🏠 Dashboard":
                     with open(temp, "wb") as f: f.write(uploaded_file.getbuffer())
                     prog = st.progress(0)
                     status = st.empty()
+                    
                     # 👇 Change the online check to respect your checkbox!
                     if force_rule_based:
                         online_mode = False
@@ -947,6 +948,189 @@ elif menu == "👥 Patient Registry":
                         st.rerun()
 
                       
+# # =========================================================
+# # 3. CLINICAL REPORTS (FORMAL TABLE DESIGN)
+# # =========================================================
+# elif menu == "📄 Clinical Reports":
+#     st.title("📄 Clinical Reports")
+    
+#     patients = get_all_patients()
+#     if not patients:
+#         st.warning("No patients found.")
+#         st.stop()
+        
+#     patients = list(reversed(patients))
+#     pmap = {f"{p[1]}": p[0] for p in patients}
+#     sel = st.selectbox("Select Patient", list(pmap.keys()))
+#     pid = pmap[sel]
+#     curr = next(p for p in patients if p[0]==pid)
+
+#     # --- PREPARE PDF VIEWER & EYE ICON ---
+#     import os
+#     import base64
+    
+#     pdf_html = ""
+#     results = get_patient_report(pid)
+    
+#     if results:
+#         latest_date = results[0][1]
+#         safe_date = latest_date.replace("/", "-")
+        
+#         pdf_path = None
+#         if os.path.exists("uploaded_reports"):
+#             # 1. Find all files starting with "PatientID_"
+#             matching_files = [f for f in os.listdir("uploaded_reports") if f.startswith(f"{pid}_")]
+            
+#             if matching_files:
+#                 # 2. 🔥 Sort by 'File Creation Time' to get the one you JUST uploaded
+#                 matching_files.sort(key=lambda x: os.path.getmtime(os.path.join("uploaded_reports", x)), reverse=True)
+#                 pdf_path = os.path.join("uploaded_reports", matching_files[0])
+
+#         # Now the eye icon will always open the correct file!
+                
+
+#         if pdf_path:
+#             import os
+#             file_size_mb = os.path.getsize(pdf_path) / (1024 * 1024)
+            
+#             # FOOLPROOF CLOUD VIEWER: Convert PDF to images so the browser never blocks it!
+#             import fitz  # PyMuPDF
+#             import base64
+
+#             try:
+#                 doc = fitz.open(pdf_path)
+#                 img_html = "<div style='overflow-y: auto; height: 100%; width: 100%; background: #525659; text-align: center; padding: 20px 0;'>"
+
+#                 for page_num in range(len(doc)):
+#                     page = doc.load_page(page_num)
+#                     pix = page.get_pixmap(dpi=120) 
+#                     img_base64 = base64.b64encode(pix.tobytes("png")).decode('utf-8')
+#                     img_html += f'<img src="data:image/png;base64,{img_base64}" style="max-width: 95%; margin-bottom: 20px; box-shadow: 0px 4px 10px rgba(0,0,0,0.5);"><br>'
+
+#                 img_html += "</div>"
+#                 viewer_content = img_html
+#             except Exception as e:
+#                 viewer_content = f"<div style='padding:20px; color:red; text-align:center;'>Error loading PDF view: {e}</div>"
+
+#             # --- Inject the chosen viewer into your custom Eye Icon Modal ---
+#             pdf_html = f"""
+# <style>
+#     #modal-toggle {{ display: none; }}
+#     .modal-overlay {{ display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.6); z-index: 99998; }}
+#     .modal-content {{ display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 75vw; height: 85vh; background: white; z-index: 99999; border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.5); overflow: hidden; flex-direction: column; }}
+#     #modal-toggle:checked ~ .modal-overlay {{ display: block; }}
+#     #modal-toggle:checked ~ .modal-content {{ display: flex; }}
+# </style>
+
+# <div style="position:absolute; top:20px; right:20px; z-index:100;">
+#     <label for="modal-toggle" style="cursor:pointer; font-size:28px;" title="View original record">👁️</label>
+# </div>
+
+# <input type="checkbox" id="modal-toggle">
+# <label for="modal-toggle" class="modal-overlay"></label>
+
+# <div class="modal-content">
+#     <div style="background:#1e293b; color:white; padding:12px 20px; font-weight:bold; font-size:16px; display:flex; justify-content:space-between; align-items:center;">
+#         <span>📄 Original Lab Report ({latest_date})</span>
+#         <label for="modal-toggle" style="cursor:pointer; font-size:14px; background:#ef4444; color:white; padding:6px 14px; border-radius:6px; font-weight:bold; letter-spacing:0.5px;" title="Close Report">✖</label>
+#     </div>
+#     {viewer_content}
+# </div>
+#             """
+
+#     # Patient Banner (Injecting the HTML correctly with .strip() to remove extra spaces)
+#     st.markdown(f"""
+#     <div style="position:relative; background:#f1f5f9; padding:20px; border-radius:12px; border-left:6px solid #4f46e5; margin-bottom:20px;">
+#         <h2 style="margin:0; color:#000000; font-weight:800; font-size:32px">{curr[1]}</h2>
+#         <div style="margin-top:5px; font-size:20px; display: flex; gap: 20px; align-items: center;">
+#             <span class="patient-header-text">🎂 {curr[2]} Years</span>
+#             <span class="patient-header-text">⚧ {curr[3]}</span>
+#             <span class="patient-header-text">🆔 #{curr[0]}</span>
+#         </div>
+#         {pdf_html.strip()}
+#     </div>
+#     """, unsafe_allow_html=True)
+
+#     if results:
+#         #results.sort(key=lambda x: (x[2], x[3], x[1]))
+#         # Change Line 539 to this:
+#         results.sort(key=lambda x: (x[2], datetime.datetime.strptime(x[1], '%d-%m-%y'), x[3]), reverse=True)
+#         # --- FORMAL HEADER ---
+#         st.markdown("""
+#         <div class="report-table-header">
+#             <div class="header-item">Test Name</div>
+#             <div class="header-item">Value</div>
+#             <div class="header-item">Unit</div>
+#             <div class="header-item">Reference</div>
+#             <div class="header-item">Status</div>
+#         </div>
+#         """, unsafe_allow_html=True)
+
+       
+
+#         curr_cat = None
+#         for row in results:
+#             rid, rdate, cat, name, val, unit, ref, status = row
+            
+#             # --- POSITION A: Category Divider ---
+#             if cat != curr_cat:
+#                 st.markdown(f"""<div class="category-header">{cat}</div>""", unsafe_allow_html=True)
+#                 curr_cat = cat
+            
+#             # --- POSITION B: Status Style ---
+#             status_cls = "stat-txt-Normal"
+#             if status == "High": status_cls = "stat-txt-High"
+#             elif status == "Low": status_cls = "stat-txt-Low"
+            
+#             # --- POSITION C: Table Row (Added Date into the Name Column) ---
+#             st.markdown(f"""
+#             <div class="report-table-row">
+#                 <div class="tbl-name">
+#                     {name} <span style="color: #64748b; font-weight: 450; font-size: 13px; margin-left: 8px;">({rdate})</span>
+#                     <span class="tooltiptext">{rdate}</span>
+#                 </div>
+#                 <div class="tbl-val">{val}</div>
+#                 <div class="tbl-unit">{unit}</div>
+#                 <div class="tbl-range">{ref}</div>
+#                 <div class="{status_cls}">{status}</div>
+#             </div>
+#             """, unsafe_allow_html=True)
+#     else:
+#         st.info("No records found.")
+#         results = []
+
+#     st.markdown("---")
+    
+#     # ACTIONS
+#     with st.expander("⚡ Modify Records"):
+#         t1, t2, t3 = st.tabs(["📝 Edit", "➕ Add", "❌ Delete"])
+#         with t1:
+#             if results:
+#                 rmap = {f"{r[3]} ({r[4]})": r for r in results}
+#                 rc = st.selectbox("Select Result", list(rmap.keys()))
+#                 if rc:
+#                     rec = rmap[rc]
+#                     with st.form("ed"):
+#                         c1, c2 = st.columns(2)
+#                         v = c1.text_input("Val", rec[4]); u = c2.text_input("Unit", rec[5])
+#                         r = c1.text_input("Range", rec[6]); s = c2.selectbox("Status", ["Normal", "High", "Low", "N/A"], index=0)
+#                         if st.form_submit_button("💾 Update"): update_test_record(rec[0], v, u, r, s); st.rerun()
+#         with t2:
+#             with st.form("ad"):
+#                 d = st.text_input("Date", str(datetime.date.today())); cat = st.text_input("Cat", "HEMATOLOGY"); nm = st.text_input("Name")
+#                 c1, c2 = st.columns(2)
+#                 v = c1.text_input("Val"); u = c2.text_input("Unit"); r = c1.text_input("Range"); s = c2.selectbox("Status", ["Normal", "High", "Low"])
+#                 if st.form_submit_button("💾 Add Record"): add_manual_test_record(pid, d, cat, nm, v, u, r, s); st.rerun()
+#         with t3:
+#             if results:
+#                 dk = st.selectbox("Select Result", list(rmap.keys()), key="dk")
+#                 if st.button("🗑️ Request Delete"): st.session_state["confirm_delete_rid"] = rmap[dk][0]; st.rerun()
+#                 if st.session_state.get("confirm_delete_rid") == rmap[dk][0]:
+#                     if st.button("✅ Confirm Delete"): delete_test_record(rmap[dk][0]); del st.session_state["confirm_delete_rid"]; st.rerun()
+#                     if st.button("❌ Cancel"): del st.session_state["confirm_delete_rid"]; st.rerun()
+
+
+
 # =========================================================
 # 3. CLINICAL REPORTS (FORMAL TABLE DESIGN)
 # =========================================================
@@ -967,6 +1151,8 @@ elif menu == "📄 Clinical Reports":
     # --- PREPARE PDF VIEWER & EYE ICON ---
     import os
     import base64
+    import io
+    import pandas as pd
     
     pdf_html = ""
     results = get_patient_report(pid)
@@ -975,18 +1161,29 @@ elif menu == "📄 Clinical Reports":
         latest_date = results[0][1]
         safe_date = latest_date.replace("/", "-")
         
+        # 👇 NEW: GENERATE EXCEL DATA IN MEMORY FOR THE HTML DOWNLOAD LINK
+        excel_data = [{"Patient ID": curr[0], "Name": curr[1], "Age": curr[2], "Gender": curr[3], 
+                       "Test Date": r[1], "Category": r[2], "Test Name": r[3], 
+                       "Result Value": r[4], "Unit": r[5], "Status": r[7]} for r in results]
+        
+        buffer = io.BytesIO()
+        with pd.ExcelWriter(buffer, engine='xlsxwriter') as writer:
+            pd.DataFrame(excel_data).to_excel(writer, index=False, sheet_name='Patient_Data')
+        
+        b64_excel = base64.b64encode(buffer.getvalue()).decode()
+        excel_href = f"data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,{b64_excel}"
+        download_filename = f"ReportLens_{str(curr[1]).replace(' ', '_')}.xlsx"
+        # 👆 -----------------------------------------------------------------
+        
         pdf_path = None
         if os.path.exists("uploaded_reports"):
             # 1. Find all files starting with "PatientID_"
             matching_files = [f for f in os.listdir("uploaded_reports") if f.startswith(f"{pid}_")]
             
             if matching_files:
-                # 2. 🔥 Sort by 'File Creation Time' to get the one you JUST uploaded
+                # 2. Sort by 'File Creation Time' to get the one you JUST uploaded
                 matching_files.sort(key=lambda x: os.path.getmtime(os.path.join("uploaded_reports", x)), reverse=True)
                 pdf_path = os.path.join("uploaded_reports", matching_files[0])
-
-        # Now the eye icon will always open the correct file!
-                
 
         if pdf_path:
             import os
@@ -1011,7 +1208,7 @@ elif menu == "📄 Clinical Reports":
             except Exception as e:
                 viewer_content = f"<div style='padding:20px; color:red; text-align:center;'>Error loading PDF view: {e}</div>"
 
-            # --- Inject the chosen viewer into your custom Eye Icon Modal ---
+            # --- Inject the chosen viewer & DOWNLOAD BUTTON into your custom Eye Icon Modal ---
             pdf_html = f"""
 <style>
     #modal-toggle {{ display: none; }}
@@ -1019,10 +1216,12 @@ elif menu == "📄 Clinical Reports":
     .modal-content {{ display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 75vw; height: 85vh; background: white; z-index: 99999; border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.5); overflow: hidden; flex-direction: column; }}
     #modal-toggle:checked ~ .modal-overlay {{ display: block; }}
     #modal-toggle:checked ~ .modal-content {{ display: flex; }}
+    .icon-hover:hover {{ transform: scale(1.1); transition: 0.2s; }}
 </style>
 
-<div style="position:absolute; top:20px; right:20px; z-index:100;">
-    <label for="modal-toggle" style="cursor:pointer; font-size:28px;" title="View original record">👁️</label>
+<div style="position:absolute; top:20px; right:20px; z-index:100; display:flex; gap:15px; align-items:center;">
+    <a href="{excel_href}" download="{download_filename}" style="text-decoration:none; font-size:26px;" class="icon-hover" title="Download Excel Data">📥</a>
+    <label for="modal-toggle" style="cursor:pointer; font-size:28px;" class="icon-hover" title="View original record">👁️</label>
 </div>
 
 <input type="checkbox" id="modal-toggle">
@@ -1051,7 +1250,6 @@ elif menu == "📄 Clinical Reports":
     """, unsafe_allow_html=True)
 
     if results:
-        #results.sort(key=lambda x: (x[2], x[3], x[1]))
         # Change Line 539 to this:
         results.sort(key=lambda x: (x[2], datetime.datetime.strptime(x[1], '%d-%m-%y'), x[3]), reverse=True)
         # --- FORMAL HEADER ---
@@ -1064,8 +1262,6 @@ elif menu == "📄 Clinical Reports":
             <div class="header-item">Status</div>
         </div>
         """, unsafe_allow_html=True)
-
-       
 
         curr_cat = None
         for row in results:
@@ -1127,10 +1323,3 @@ elif menu == "📄 Clinical Reports":
                 if st.session_state.get("confirm_delete_rid") == rmap[dk][0]:
                     if st.button("✅ Confirm Delete"): delete_test_record(rmap[dk][0]); del st.session_state["confirm_delete_rid"]; st.rerun()
                     if st.button("❌ Cancel"): del st.session_state["confirm_delete_rid"]; st.rerun()
-
-
-
-
-                    
-
-
