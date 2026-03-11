@@ -5,3 +5,4 @@ Pillow
 groq
 python-dotenv
 PyMuPDF
+xlsxwriter
