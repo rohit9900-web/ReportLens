@@ -466,7 +466,7 @@ if menu == "🏠 Dashboard":
                         with st.spinner("Processing..."):
                             # Step 1: Always run OCR
                             status.markdown(f"**⏳ Step 1: OCR Extraction...**")
-                            subprocess.run(["sys.executable", "1_extract_ocr.py", temp], check=True)
+                            subprocess.run([sys.executable, "1_extract_ocr.py", temp], check=True)
                             prog.progress(25)
 
                             if online_mode:
