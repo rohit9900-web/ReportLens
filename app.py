@@ -991,8 +991,9 @@ elif menu == "📄 Clinical Reports":
                 # FAST MODE: If file is small, use your original method
                 with open(pdf_path, "rb") as f:
                     base64_pdf = base64.b64encode(f.read()).decode('utf-8')
-                
-                viewer_content = f'<iframe src="data:application/pdf;base64,{base64_pdf}#toolbar=1&view=FitH" width="100%" style="flex-grow: 1; border:none; height:100%;"></iframe>'
+
+                # 🔥 THE FIX: Using <embed> instead of <iframe> to bypass cloud security blocks
+                viewer_content = f'<embed src="data:application/pdf;base64,{base64_pdf}#toolbar=1&view=FitH" type="application/pdf" width="100%" height="100%" style="flex-grow: 1; border:none;">'
                 
             else:
                 # LARGE FILE MODE: Convert pages to images so the browser doesn't crash
