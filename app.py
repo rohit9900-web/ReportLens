@@ -791,9 +791,13 @@ if menu == "🏠 Dashboard":
                     with open(temp, "wb") as f: f.write(uploaded_file.getbuffer())
                     prog = st.progress(0)
                     status = st.empty()
-                    
-                    # Check status again at moment of click
-                    online_mode = is_connected()
+                    # 👇 Change the online check to respect your checkbox!
+                    if force_rule_based:
+                        online_mode = False
+                    else:
+                        online_mode = is_connected()
+                    # # Check status again at moment of click
+                    # online_mode = is_connected()
                     
                     try:
                         with st.spinner("Processing..."):
@@ -1128,4 +1132,5 @@ elif menu == "📄 Clinical Reports":
 
 
                     
+
 
