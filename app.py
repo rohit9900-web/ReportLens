@@ -34,97 +34,542 @@ def is_connected():
 # --- PAGE CONFIGURATION ---
 st.set_page_config(page_title="ReportLens Pro", page_icon="🩺", layout="wide")
 
-# --- 🎨 PRO MEDICAL DESIGN SYSTEM ---
+# # --- 🎨 PRO MEDICAL DESIGN SYSTEM ---
+# st.markdown("""
+# <style>
+#     @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap');
+    
+#     /* 1. GLOBAL SETTINGS */
+#     html, body {
+#         font-family: 'Manrope', sans-serif;
+# /*        color: #0f172a;  */
+#         font-size: 16px; 
+#     }
+
+#     /* 2. SIDEBAR */
+#     section[data-testid="stSidebar"] {
+#         background-color: #1e293b;
+#         border-right: 1px solid #334155;
+#     }
+#     section[data-testid="stSidebar"] h1, span, p, label {
+#        /* color: #f8fafc !important; */
+#     }
+
+#     /* 3. DASHBOARD CARDS (Fancy Style) */
+#     .stat-card {
+#         background: white;
+#         padding: 25px;
+#         border-radius: 16px;
+#         box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+#         border: 1px solid #e2e8f0;
+#         transition: all 0.3s ease;
+#     }
+#     .stat-card:hover { transform: translateY(-5px); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); }
+#     .stat-val { font-size: 40px; font-weight: 800; /*color: #0f172a; */}
+#     .stat-label { font-size: 16px; color: #64748b; font-weight: 600; text-transform: uppercase; }
+
+#     /* 4. CLINICAL REPORTS (FORMAL TABLE DESIGN) */
+#     .report-table-header {
+#         display: grid;
+#         grid-template-columns: 4fr 1.5fr 1.5fr 2fr 1.5fr; /* Columns */
+#         background-color: #f1f5f9;
+#         padding: 12px 15px;
+#         border-bottom: 2px solid #334155;
+#         margin-top: 15px;
+#     }
+#     .header-item {
+#         font-size: 14px;
+#         font-weight: 800;
+#        /* color: #334155; */
+#         text-transform: uppercase;
+#         letter-spacing: 0.5px;
+#     }
+
+#     .report-table-row {
+#         display: grid;
+#         grid-template-columns: 4fr 1.5fr 1.5fr 2fr 1.5fr; /* Match Header */
+#         padding: 12px 15px;
+#         border-bottom: 1px solid #e2e8f0;
+#         align-items: center;
+#         background: white;
+#         transition: background 0.1s;
+#     }
+#     .report-table-row:hover {
+#         background-color: #f8fafc;
+#     }
+    
+#     /* Formal Text Styles */
+#     .tbl-name { font-weight: 700; color: #0f172a; font-size: 16px; }
+#     .tbl-val { font-weight: 700; color: #000000; font-size: 16px; }
+#     .tbl-unit { font-size: 14px; color: #64748b; }
+#     .tbl-range { font-size: 14px; color: #64748b; }
+    
+#     /* Formal Status Text (No Badges) */
+#     .stat-txt-High { color: #dc2626; font-weight: 700; }
+#     .stat-txt-Low { color: #d97706; font-weight: 700; }
+#     .stat-txt-Normal { color: #15803d; font-weight: 600; }
+
+#     /* Category Separator */
+#     .category-header {
+#         background-color: #e2e8f0;
+#         padding: 8px 15px;
+#         font-weight: 800;
+#         font-size: 14px;
+#        /* color: #475569; */
+#         border-bottom: 1px solid #cbd5e1;
+#         margin-top: 0px;
+#     }
+
+#     /* 5. BUTTONS (FIXED VISIBILITY FOR BOTH REGULAR AND FORM BUTTONS) */
+#     div[data-testid="stButton"] button,
+#     div[data-testid="stFormSubmitButton"] button {
+#         background: #2563eb !important; /* Bright Blue */
+#         /*color: white !important; */        /* White Text */
+#         border: none !important;
+#         padding: 0.6rem 1.2rem !important;
+#         border-radius: 8px !important;
+#         font-weight: 700 !important;
+#         width: 100% !important;
+#         font-size: 16px !important;
+#     }
+#     div[data-testid="stButton"] button p,
+#     div[data-testid="stFormSubmitButton"] button p {
+#         color: white !important;
+#     }
+#     div[data-testid="stButton"] button:hover,
+#     div[data-testid="stFormSubmitButton"] button:hover {
+#         background: #1e40af !important;
+#     }
+
+#     /* 6. INFO BOX & ALERTS (FIXED READABILITY) */
+#     .info-box-contrast {
+#         background-color: white;
+#         border: 2px solid #3b82f6; 
+#         padding: 20px;
+#         border-radius: 10px;
+#         /*color: #0f172a;*/
+#     }
+#     .info-box-contrast h5 { color: #1e40af !important; font-weight: 800; font-size: 20px; }
+#     .info-box-contrast p { color: #334155 !important; font-size: 18px; }
+
+#     /* Force Error/Warning Text to be Black */
+#     div[data-testid="stAlert"] { color: #000000 !important; }
+#     div[data-testid="stAlert"] p { color: #000000 !important; font-weight: 600 !important; }
+
+#     /* ============================================================ */
+#     /* 👇 NEW FIXES: Force specific missing elements to be DARK 👇 */
+#     /* ============================================================ */
+
+#     /* 1. Make TAB Text (Edit, Add, Delete) Dark */
+#     button[data-baseweb="tab"] div p {
+#        /* color: #0f172a !important;*/ 
+#         font-weight: 800 !important;
+#     }
+    
+#     /* 2. FORCE ALL INPUT LABELS TO BE DARK (Name, Age, Val, Unit, Range) */
+#     label, label *, div[data-testid="stWidgetLabel"] p {
+#         /*color: #0f172a !important; */
+#         font-weight: 800 !important;
+#     }
+
+#     /* 3. Make PATIENT HEADER Text (Age, Gender) Dark */
+#     .patient-header-text {
+#         /*color: #000000 !important;*/
+#         font-weight: 700;
+#     }
+            
+
+#     /* 4. FORCE SIDEBAR MENU TEXT BACK TO WHITE */
+#     section[data-testid="stSidebar"] label,
+#     section[data-testid="stSidebar"] label *,
+#     section[data-testid="stSidebar"] p,
+#     section[data-testid="stSidebar"] span {
+#         /*color: #ffffff !important;*/
+#         font-weight: 600 !important;
+#     }
+            
+
+#     /* ========================================== */
+#     /* 👇 FINAL FIXES FOR EXPANDER & SIDEBAR 👇   */
+#     /* ========================================== */
+
+#     /* 1. Force the Expander Title ("Modify Records") to be Dark */
+#     div[data-testid="stExpander"] summary p,
+#     div[data-testid="stExpander"] summary span,
+#     summary p {
+#         /*color: #0f172a !important;*/ /* Dark Blue/Black */
+#         font-weight: 800 !important;
+#         font-size: 18px !important;
+#     }
+
+#     /* 2. Force Sidebar Menu Text to be Bright White */
+#     section[data-testid="stSidebar"] div[data-testid="stRadio"] p,
+#     section[data-testid="stSidebar"] label p {
+#         /*color: #ffffff !important;*/
+#         font-weight: 700 !important;
+#         opacity: 1 !important; /* Removes Streamlit's default dimming */
+#     }
+            
+
+#     /* ============================================================ */
+#     /* 👇 NEW FIXES: Force specific missing elements to be DARK 👇 */
+#     /* ============================================================ */
+
+#     /* 1. Make TAB Text (Edit, Add, Delete) Dark */
+#     button[data-baseweb="tab"] * {
+#         /*color: #0f172a !important;*/ 
+#         font-weight: 800 !important;
+#     }
+#     button[data-baseweb="tab"][aria-selected="true"] * {
+#         /*color: #2563eb !important; */
+#     }
+    
+#     /* 2. FORCE ALL INPUT LABELS TO BE DARK (Name, Age, Val, Unit, Range) */
+#     div[data-testid="stVerticalBlock"] label *, div[data-testid="stForm"] label * {
+#         /*color: #0f172a !important;*/ 
+#         font-weight: 800 !important;
+#     }
+
+#     /* 3. Make PATIENT HEADER Text (Age, Gender) Dark */
+#     .patient-header-text, .patient-header-text * {
+#         /*color: #000000 !important;*/
+#         font-weight: 800 !important;
+#     }
+            
+#     /* 4. FORCE SIDEBAR MENU TEXT BACK TO WHITE */
+#     section[data-testid="stSidebar"] label * {
+#         /*color: #ffffff !important;*/
+#         font-weight: 600 !important;
+#     }
+            
+#     /* 5. Force the Expander Title ("Modify Records") to be Dark */
+#     div[data-testid="stExpander"] summary * {
+#         /* color: #0f172a !important; */
+#         font-weight: 800 !important;
+#     }
+            
+
+
+
+
+
+#     /* 7. CUSTOM INSTANT TOOLTIP */
+#     .tbl-name {
+#         position: relative;
+#         display: inline-block;
+#     }
+    
+#     .tbl-name .tooltiptext {
+#         visibility: hidden;
+#         background-color: #374151; /* Dark gray exactly like your screenshot */
+#         /* color: #ffffff !important;*/
+#         text-align: center;
+#         border-radius: 6px;
+#         padding: 6px 12px;
+#         font-size: 13px;
+#         font-weight: 600 !important;
+#         position: absolute;
+#         z-index: 50;
+#         bottom: 120%; /* Positions it right above the text */
+#         left: 0;
+#         opacity: 0;
+#         transition: opacity 0.2s ease-in-out;
+#         white-space: nowrap;
+#         box-shadow: 0px 4px 6px rgba(0,0,0,0.1);
+#     }
+
+#     .tbl-name:hover .tooltiptext {
+#         visibility: visible;
+#         opacity: 1;
+#     }
+
+# </style>
+# """, unsafe_allow_html=True)
+
+
+# # --- 🎨 PRO MEDICAL DESIGN SYSTEM (AUTO-ADAPTIVE) ---
+# st.markdown("""
+# <style>
+#     @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap');
+    
+#     /* 1. GLOBAL SETTINGS */
+#     html, body {
+#         font-family: 'Manrope', sans-serif;
+#         font-size: 16px; 
+#     }
+
+#     /* 2. DASHBOARD CARDS (Adaptive Background) */
+#     .stat-card {
+#         padding: 25px;
+#         border-radius: 16px;
+#         box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+#         border: 1px solid rgba(128, 128, 128, 0.2); /* Soft transparent border */
+#         transition: all 0.3s ease;
+#     }
+#     .stat-card:hover { transform: translateY(-5px); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2); }
+#     .stat-val { font-size: 40px; font-weight: 800; }
+#     .stat-label { font-size: 16px; font-weight: 600; text-transform: uppercase; opacity: 0.7; }
+
+#     /* 3. CLINICAL REPORTS (FORMAL TABLE DESIGN) */
+#     .report-table-header {
+#         display: grid;
+#         grid-template-columns: 4fr 1.5fr 1.5fr 2fr 1.5fr;
+#         background-color: rgba(128, 128, 128, 0.15); /* Adapts to both light/dark */
+#         padding: 12px 15px;
+#         border-bottom: 2px solid rgba(128, 128, 128, 0.5);
+#         margin-top: 15px;
+#     }
+#     .header-item {
+#         font-size: 14px;
+#         font-weight: 800;
+#         text-transform: uppercase;
+#         letter-spacing: 0.5px;
+#     }
+
+#     .report-table-row {
+#         display: grid;
+#         grid-template-columns: 4fr 1.5fr 1.5fr 2fr 1.5fr;
+#         padding: 12px 15px;
+#         border-bottom: 1px solid rgba(128, 128, 128, 0.2);
+#         align-items: center;
+#         transition: background 0.1s;
+#     }
+#     .report-table-row:hover {
+#         background-color: rgba(128, 128, 128, 0.1);
+#     }
+    
+#     /* Formal Text Styles */
+#     .tbl-name { font-weight: 700; font-size: 16px; }
+#     .tbl-val { font-weight: 700; font-size: 16px; }
+#     .tbl-unit, .tbl-range { font-size: 14px; opacity: 0.8; }
+    
+#     /* Formal Status Text (Kept hardcoded because Red/Green is universal) */
+#     .stat-txt-High { color: #ff4b4b !important; font-weight: 700; } /* Brighter red for visibility */
+#     .stat-txt-Low { color: #faca2b !important; font-weight: 700; }  /* Brighter yellow/orange */
+#     .stat-txt-Normal { color: #21c354 !important; font-weight: 600; } /* Brighter green */
+
+#     /* Category Separator */
+#     .category-header {
+#         background-color: rgba(128, 128, 128, 0.2);
+#         padding: 8px 15px;
+#         font-weight: 800;
+#         font-size: 14px;
+#         border-bottom: 1px solid rgba(128, 128, 128, 0.4);
+#         margin-top: 0px;
+#     }
+
+#     /* 4. BUTTONS (Explicit colors are fine here) */
+#     div[data-testid="stButton"] button,
+#     div[data-testid="stFormSubmitButton"] button {
+#         background: #2563eb !important; 
+#         border: none !important;
+#         padding: 0.6rem 1.2rem !important;
+#         border-radius: 8px !important;
+#         font-weight: 700 !important;
+#         width: 100% !important;
+#         font-size: 16px !important;
+#     }
+#     div[data-testid="stButton"] button p,
+#     div[data-testid="stFormSubmitButton"] button p {
+#         color: white !important; /* Always white text on blue button */
+#     }
+#     div[data-testid="stButton"] button:hover,
+#     div[data-testid="stFormSubmitButton"] button:hover {
+#         background: #1e40af !important;
+#     }
+
+#     /* 5. INFO BOX & ALERTS */
+#     .info-box-contrast {
+#         border: 2px solid #3b82f6; 
+#         padding: 20px;
+#         border-radius: 10px;
+#     }
+#     .info-box-contrast h5 { color: #3b82f6 !important; font-weight: 800; font-size: 20px; }
+#     .info-box-contrast p { font-size: 18px; }
+
+#     /* 6. STRUCTURAL WEIGHT FIXES */
+#     button[data-baseweb="tab"] * { font-weight: 800 !important; }
+#     div[data-testid="stVerticalBlock"] label *, div[data-testid="stForm"] label * { font-weight: 800 !important; }
+#     .patient-header-text, .patient-header-text * { font-weight: 800 !important; }
+#     section[data-testid="stSidebar"] label * { font-weight: 600 !important; }
+#     div[data-testid="stExpander"] summary * { font-weight: 800 !important; }
+
+#     /* 7. CUSTOM INSTANT TOOLTIP */
+#     .tbl-name {
+#         position: relative;
+#         display: inline-block;
+#     }
+#     .tbl-name .tooltiptext {
+#         visibility: hidden;
+#         background-color: #374151; 
+#         color: #ffffff !important; /* Explicitly white so it shows on the dark tooltip background */
+#         text-align: center;
+#         border-radius: 6px;
+#         padding: 6px 12px;
+#         font-size: 13px;
+#         font-weight: 600 !important;
+#         position: absolute;
+#         z-index: 50;
+#         bottom: 120%; 
+#         left: 0;
+#         opacity: 0;
+#         transition: opacity 0.2s ease-in-out;
+#         white-space: nowrap;
+#         box-shadow: 0px 4px 6px rgba(0,0,0,0.3);
+#     }
+#     .tbl-name:hover .tooltiptext {
+#         visibility: visible;
+#         opacity: 1;
+#     }
+# </style>
+# """, unsafe_allow_html=True)
+
+
+# # --- POSITION: Top of app.py ---
+# st.markdown("""
+#     <style>
+#     /* 1. Make the Expander itself transparent */
+#     .stSidebar [data-testid="stExpander"] {
+#         border: none !important;
+#         background-color: transparent !important;
+#         box-shadow: none !important;
+#     }
+
+#     /* 2. Format the "SYSTEM ADMIN" title */
+#     .stSidebar [data-testid="stExpander"] summary p {
+#         font-size: 15px !important;
+#         /*color: #94a3b8 !important;*/
+#         text-transform: uppercase;
+#         font-weight: bold;
+#     }
+
+#     /* 3. Remove default Streamlit gaps between items */
+#     .stSidebar [data-testid="stExpanderDetails"] {
+#         display: flex;
+#         flex-direction: column;
+#         gap: 0px !important;
+#         padding-top: 0px !important;
+#         padding-bottom: 5px !important;
+#     }
+
+#     /* 4. Turn bulky buttons into a tight text list */
+#     .stSidebar [data-testid="stExpanderDetails"] button {
+#         background-color: transparent !important; 
+#         border: none !important;                  
+#         box-shadow: none !important;              
+#        /* color: #cbd5e1 !important; */                
+#         justify-content: flex-start !important;   
+#         text-align: left !important;
+#         width: 100% !important;
+#         padding: 4px 10px !important;             
+#         font-size: 13px !important;
+#         margin: 0px !important;
+#         min-height: 28px !important;
+#     }
+
+#     /* 5. Subtle hover effect for the list items */
+#     .stSidebar [data-testid="stExpanderDetails"] button:hover {
+#         background-color: rgba(255, 255, 255, 0.08) !important; 
+#        /* color: #ffffff !important; */
+#         border-radius: 4px !important;
+#     }
+
+#     /* 6. 🔥 TARGET THE CORRECT "stAlert" BOX TO FORCE 1-LINE */
+#     .stSidebar [data-testid="stAlert"] {
+#         padding: 2px 8px !important; /* Shrink the outer box */
+#         min-height: 20px !important;
+#         margin-bottom: 5px !important;
+#         width: 100% !important;
+#     }
+    
+#     /* Force the text inside the alert to stay on one line */
+#     .stSidebar [data-testid="stAlert"] div,
+#     .stSidebar [data-testid="stAlert"] p,
+#     .stSidebar [data-testid="stAlert"] span {
+#         white-space: nowrap !important; 
+#         font-size: 15px !important;     
+#         margin: 0px !important;
+#         padding: 0px !important;
+#         line-height: 1.5 !important;
+#     }
+#     </style>
+# """, unsafe_allow_html=True)
+
+# --- 🎨 PRO MEDICAL DESIGN SYSTEM (AUTO-ADAPTIVE) ---
 st.markdown("""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap');
     
-    /* 1. GLOBAL SETTINGS */
+    /* =========================================
+       1. GLOBAL SETTINGS & MAIN DASHBOARD
+       ========================================= */
     html, body {
         font-family: 'Manrope', sans-serif;
-/*        color: #0f172a;  */
         font-size: 16px; 
     }
 
-    /* 2. SIDEBAR */
-    section[data-testid="stSidebar"] {
-        background-color: #1e293b;
-        border-right: 1px solid #334155;
-    }
-    section[data-testid="stSidebar"] h1, span, p, label {
-       /* color: #f8fafc !important; */
-    }
-
-    /* 3. DASHBOARD CARDS (Fancy Style) */
+    /* Dashboard Cards (Adaptive Background) */
     .stat-card {
-        background: white;
         padding: 25px;
         border-radius: 16px;
         box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-        border: 1px solid #e2e8f0;
+        border: 1px solid rgba(128, 128, 128, 0.2); 
         transition: all 0.3s ease;
     }
-    .stat-card:hover { transform: translateY(-5px); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); }
-    .stat-val { font-size: 40px; font-weight: 800; color: #0f172a; }
-    .stat-label { font-size: 16px; color: #64748b; font-weight: 600; text-transform: uppercase; }
+    .stat-card:hover { transform: translateY(-5px); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2); }
+    .stat-val { font-size: 40px; font-weight: 800; }
+    .stat-label { font-size: 16px; font-weight: 600; text-transform: uppercase; opacity: 0.7; }
 
-    /* 4. CLINICAL REPORTS (FORMAL TABLE DESIGN) */
+    /* Clinical Reports (Formal Table Design) */
     .report-table-header {
         display: grid;
-        grid-template-columns: 4fr 1.5fr 1.5fr 2fr 1.5fr; /* Columns */
-        background-color: #f1f5f9;
+        grid-template-columns: 4fr 1.5fr 1.5fr 2fr 1.5fr;
+        background-color: rgba(128, 128, 128, 0.15); 
         padding: 12px 15px;
-        border-bottom: 2px solid #334155;
+        border-bottom: 2px solid rgba(128, 128, 128, 0.5);
         margin-top: 15px;
     }
     .header-item {
         font-size: 14px;
         font-weight: 800;
-       /* color: #334155; */
         text-transform: uppercase;
         letter-spacing: 0.5px;
     }
 
     .report-table-row {
         display: grid;
-        grid-template-columns: 4fr 1.5fr 1.5fr 2fr 1.5fr; /* Match Header */
+        grid-template-columns: 4fr 1.5fr 1.5fr 2fr 1.5fr;
         padding: 12px 15px;
-        border-bottom: 1px solid #e2e8f0;
+        border-bottom: 1px solid rgba(128, 128, 128, 0.2);
         align-items: center;
-        background: white;
         transition: background 0.1s;
     }
-    .report-table-row:hover {
-        background-color: #f8fafc;
-    }
+    .report-table-row:hover { background-color: rgba(128, 128, 128, 0.1); }
     
     /* Formal Text Styles */
-    .tbl-name { font-weight: 700; color: #0f172a; font-size: 16px; }
-    .tbl-val { font-weight: 700; color: #000000; font-size: 16px; }
-    .tbl-unit { font-size: 14px; color: #64748b; }
-    .tbl-range { font-size: 14px; color: #64748b; }
+    .tbl-name { font-weight: 700; font-size: 16px; }
+    .tbl-val { font-weight: 700; font-size: 16px; }
+    .tbl-unit, .tbl-range { font-size: 14px; opacity: 0.8; }
     
-    /* Formal Status Text (No Badges) */
-    .stat-txt-High { color: #dc2626; font-weight: 700; }
-    .stat-txt-Low { color: #d97706; font-weight: 700; }
-    .stat-txt-Normal { color: #15803d; font-weight: 600; }
+    /* Formal Status Text */
+    .stat-txt-High { color: #ff4b4b !important; font-weight: 700; } 
+    .stat-txt-Low { color: #faca2b !important; font-weight: 700; }  
+    .stat-txt-Normal { color: #21c354 !important; font-weight: 600; } 
 
     /* Category Separator */
     .category-header {
-        background-color: #e2e8f0;
+        background-color: rgba(128, 128, 128, 0.2);
         padding: 8px 15px;
         font-weight: 800;
         font-size: 14px;
-       /* color: #475569; */
-        border-bottom: 1px solid #cbd5e1;
+        border-bottom: 1px solid rgba(128, 128, 128, 0.4);
         margin-top: 0px;
     }
 
-    /* 5. BUTTONS (FIXED VISIBILITY FOR BOTH REGULAR AND FORM BUTTONS) */
+    /* Buttons */
     div[data-testid="stButton"] button,
     div[data-testid="stFormSubmitButton"] button {
-        background: #2563eb !important; /* Bright Blue */
-        /*color: white !important; */        /* White Text */
+        background: #2563eb !important; 
         border: none !important;
         padding: 0.6rem 1.2rem !important;
         border-radius: 8px !important;
@@ -133,136 +578,27 @@ st.markdown("""
         font-size: 16px !important;
     }
     div[data-testid="stButton"] button p,
-    div[data-testid="stFormSubmitButton"] button p {
-        color: white !important;
-    }
+    div[data-testid="stFormSubmitButton"] button p { color: white !important; }
     div[data-testid="stButton"] button:hover,
-    div[data-testid="stFormSubmitButton"] button:hover {
-        background: #1e40af !important;
-    }
+    div[data-testid="stFormSubmitButton"] button:hover { background: #1e40af !important; }
 
-    /* 6. INFO BOX & ALERTS (FIXED READABILITY) */
-    .info-box-contrast {
-        background-color: white;
-        border: 2px solid #3b82f6; 
-        padding: 20px;
-        border-radius: 10px;
-        /*color: #0f172a;*/
-    }
-    .info-box-contrast h5 { color: #1e40af !important; font-weight: 800; font-size: 20px; }
-    .info-box-contrast p { color: #334155 !important; font-size: 18px; }
-
-    /* Force Error/Warning Text to be Black */
-    div[data-testid="stAlert"] { color: #000000 !important; }
-    div[data-testid="stAlert"] p { color: #000000 !important; font-weight: 600 !important; }
-
-    /* ============================================================ */
-    /* 👇 NEW FIXES: Force specific missing elements to be DARK 👇 */
-    /* ============================================================ */
-
-    /* 1. Make TAB Text (Edit, Add, Delete) Dark */
-    button[data-baseweb="tab"] div p {
-       /* color: #0f172a !important;*/ 
-        font-weight: 800 !important;
-    }
+    /* Info Box & Structural Fixes */
+    .info-box-contrast { border: 2px solid #3b82f6; padding: 20px; border-radius: 10px; }
+    .info-box-contrast h5 { color: #3b82f6 !important; font-weight: 800; font-size: 20px; }
+    .info-box-contrast p { font-size: 18px; }
     
-    /* 2. FORCE ALL INPUT LABELS TO BE DARK (Name, Age, Val, Unit, Range) */
-    label, label *, div[data-testid="stWidgetLabel"] p {
-        /*color: #0f172a !important; */
-        font-weight: 800 !important;
-    }
+    button[data-baseweb="tab"] * { font-weight: 800 !important; }
+    div[data-testid="stVerticalBlock"] label *, div[data-testid="stForm"] label * { font-weight: 800 !important; }
+    .patient-header-text, .patient-header-text * { font-weight: 800 !important; }
+    section[data-testid="stSidebar"] label * { font-weight: 600 !important; }
+    div[data-testid="stExpander"] summary * { font-weight: 800 !important; }
 
-    /* 3. Make PATIENT HEADER Text (Age, Gender) Dark */
-    .patient-header-text {
-        /*color: #000000 !important;*/
-        font-weight: 700;
-    }
-            
-
-    /* 4. FORCE SIDEBAR MENU TEXT BACK TO WHITE */
-    section[data-testid="stSidebar"] label,
-    section[data-testid="stSidebar"] label *,
-    section[data-testid="stSidebar"] p,
-    section[data-testid="stSidebar"] span {
-        /*color: #ffffff !important;*/
-        font-weight: 600 !important;
-    }
-            
-
-    /* ========================================== */
-    /* 👇 FINAL FIXES FOR EXPANDER & SIDEBAR 👇   */
-    /* ========================================== */
-
-    /* 1. Force the Expander Title ("Modify Records") to be Dark */
-    div[data-testid="stExpander"] summary p,
-    div[data-testid="stExpander"] summary span,
-    summary p {
-        /*color: #0f172a !important;*/ /* Dark Blue/Black */
-        font-weight: 800 !important;
-        font-size: 18px !important;
-    }
-
-    /* 2. Force Sidebar Menu Text to be Bright White */
-    section[data-testid="stSidebar"] div[data-testid="stRadio"] p,
-    section[data-testid="stSidebar"] label p {
-        /*color: #ffffff !important;*/
-        font-weight: 700 !important;
-        opacity: 1 !important; /* Removes Streamlit's default dimming */
-    }
-            
-
-    /* ============================================================ */
-    /* 👇 NEW FIXES: Force specific missing elements to be DARK 👇 */
-    /* ============================================================ */
-
-    /* 1. Make TAB Text (Edit, Add, Delete) Dark */
-    button[data-baseweb="tab"] * {
-        /*color: #0f172a !important;*/ 
-        font-weight: 800 !important;
-    }
-    button[data-baseweb="tab"][aria-selected="true"] * {
-        /*color: #2563eb !important; */
-    }
-    
-    /* 2. FORCE ALL INPUT LABELS TO BE DARK (Name, Age, Val, Unit, Range) */
-    div[data-testid="stVerticalBlock"] label *, div[data-testid="stForm"] label * {
-        /*color: #0f172a !important;*/ 
-        font-weight: 800 !important;
-    }
-
-    /* 3. Make PATIENT HEADER Text (Age, Gender) Dark */
-    .patient-header-text, .patient-header-text * {
-        /*color: #000000 !important;*/
-        font-weight: 800 !important;
-    }
-            
-    /* 4. FORCE SIDEBAR MENU TEXT BACK TO WHITE */
-    section[data-testid="stSidebar"] label * {
-        /*color: #ffffff !important;*/
-        font-weight: 600 !important;
-    }
-            
-    /* 5. Force the Expander Title ("Modify Records") to be Dark */
-    div[data-testid="stExpander"] summary * {
-        /* color: #0f172a !important; */
-        font-weight: 800 !important;
-    }
-            
-
-
-
-
-
-    /* 7. CUSTOM INSTANT TOOLTIP */
-    .tbl-name {
-        position: relative;
-        display: inline-block;
-    }
-    
+    /* Custom Instant Tooltip */
+    .tbl-name { position: relative; display: inline-block; }
     .tbl-name .tooltiptext {
         visibility: hidden;
-        background-color: #374151; /* Dark gray exactly like your screenshot */
-        /* color: #ffffff !important;*/
+        background-color: #374151; 
+        color: #ffffff !important; 
         text-align: center;
         border-radius: 6px;
         padding: 6px 12px;
@@ -270,41 +606,35 @@ st.markdown("""
         font-weight: 600 !important;
         position: absolute;
         z-index: 50;
-        bottom: 120%; /* Positions it right above the text */
+        bottom: 120%; 
         left: 0;
         opacity: 0;
         transition: opacity 0.2s ease-in-out;
         white-space: nowrap;
-        box-shadow: 0px 4px 6px rgba(0,0,0,0.1);
+        box-shadow: 0px 4px 6px rgba(0,0,0,0.3);
     }
+    .tbl-name:hover .tooltiptext { visibility: visible; opacity: 1; }
 
-    .tbl-name:hover .tooltiptext {
-        visibility: visible;
-        opacity: 1;
-    }
-
-</style>
-""", unsafe_allow_html=True)
-
-# --- POSITION: Top of app.py ---
-st.markdown("""
-    <style>
-    /* 1. Make the Expander itself transparent */
+    /* =========================================
+       2. SIDEBAR SYSTEM ADMIN FIXES
+       ========================================= */
+       
+    /* Transparent Expander */
     .stSidebar [data-testid="stExpander"] {
         border: none !important;
         background-color: transparent !important;
         box-shadow: none !important;
     }
 
-    /* 2. Format the "SYSTEM ADMIN" title */
+    /* "SYSTEM ADMIN" Title (Adaptive Opacity) */
     .stSidebar [data-testid="stExpander"] summary p {
         font-size: 15px !important;
-        /*color: #94a3b8 !important;*/
         text-transform: uppercase;
         font-weight: bold;
+        opacity: 0.7; 
     }
 
-    /* 3. Remove default Streamlit gaps between items */
+    /* Remove gaps */
     .stSidebar [data-testid="stExpanderDetails"] {
         display: flex;
         flex-direction: column;
@@ -313,12 +643,11 @@ st.markdown("""
         padding-bottom: 5px !important;
     }
 
-    /* 4. Turn bulky buttons into a tight text list */
+    /* Bulky buttons to text list (Adaptive Opacity) */
     .stSidebar [data-testid="stExpanderDetails"] button {
         background-color: transparent !important; 
         border: none !important;                  
         box-shadow: none !important;              
-       /* color: #cbd5e1 !important; */                
         justify-content: flex-start !important;   
         text-align: left !important;
         width: 100% !important;
@@ -326,24 +655,23 @@ st.markdown("""
         font-size: 13px !important;
         margin: 0px !important;
         min-height: 28px !important;
+        opacity: 0.8; 
     }
 
-    /* 5. Subtle hover effect for the list items */
+    /* Sidebar Hover Effect (Adaptive Grey Overlay) */
     .stSidebar [data-testid="stExpanderDetails"] button:hover {
-        background-color: rgba(255, 255, 255, 0.08) !important; 
-       /* color: #ffffff !important; */
+        background-color: rgba(128, 128, 128, 0.2) !important; 
         border-radius: 4px !important;
+        opacity: 1 !important;
     }
 
-    /* 6. 🔥 TARGET THE CORRECT "stAlert" BOX TO FORCE 1-LINE */
+    /* Target stAlert Box to Force 1-Line */
     .stSidebar [data-testid="stAlert"] {
-        padding: 2px 8px !important; /* Shrink the outer box */
+        padding: 2px 8px !important; 
         min-height: 20px !important;
         margin-bottom: 5px !important;
         width: 100% !important;
     }
-    
-    /* Force the text inside the alert to stay on one line */
     .stSidebar [data-testid="stAlert"] div,
     .stSidebar [data-testid="stAlert"] p,
     .stSidebar [data-testid="stAlert"] span {
@@ -353,7 +681,7 @@ st.markdown("""
         padding: 0px !important;
         line-height: 1.5 !important;
     }
-    </style>
+</style>
 """, unsafe_allow_html=True)
 # --- LOGIC HELPERS ---
 def get_greeting():
