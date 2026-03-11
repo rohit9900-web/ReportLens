@@ -13,6 +13,10 @@ from db_manager import (
     add_manual_test_record, delete_test_record
 )
 
+import db_schema
+# (If your db_schema.py has a specific function to build tables, call it too. 
+# Like: db_schema.create_tables() or whatever you named it).
+
 # --- TOP OF FILE: INITIALIZE SESSION STATE ---
 if "file_uploader_key" not in st.session_state:
     st.session_state["file_uploader_key"] = 0
