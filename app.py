@@ -35,466 +35,6 @@ def is_connected():
 # --- PAGE CONFIGURATION ---
 st.set_page_config(page_title="ReportLens Pro", page_icon="🩺", layout="wide")
 
-# # --- 🎨 PRO MEDICAL DESIGN SYSTEM ---
-# st.markdown("""
-# <style>
-#     @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap');
-    
-#     /* 1. GLOBAL SETTINGS */
-#     html, body {
-#         font-family: 'Manrope', sans-serif;
-# /*        color: #0f172a;  */
-#         font-size: 16px; 
-#     }
-
-#     /* 2. SIDEBAR */
-#     section[data-testid="stSidebar"] {
-#         background-color: #1e293b;
-#         border-right: 1px solid #334155;
-#     }
-#     section[data-testid="stSidebar"] h1, span, p, label {
-#        /* color: #f8fafc !important; */
-#     }
-
-#     /* 3. DASHBOARD CARDS (Fancy Style) */
-#     .stat-card {
-#         background: white;
-#         padding: 25px;
-#         border-radius: 16px;
-#         box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-#         border: 1px solid #e2e8f0;
-#         transition: all 0.3s ease;
-#     }
-#     .stat-card:hover { transform: translateY(-5px); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); }
-#     .stat-val { font-size: 40px; font-weight: 800; /*color: #0f172a; */}
-#     .stat-label { font-size: 16px; color: #64748b; font-weight: 600; text-transform: uppercase; }
-
-#     /* 4. CLINICAL REPORTS (FORMAL TABLE DESIGN) */
-#     .report-table-header {
-#         display: grid;
-#         grid-template-columns: 4fr 1.5fr 1.5fr 2fr 1.5fr; /* Columns */
-#         background-color: #f1f5f9;
-#         padding: 12px 15px;
-#         border-bottom: 2px solid #334155;
-#         margin-top: 15px;
-#     }
-#     .header-item {
-#         font-size: 14px;
-#         font-weight: 800;
-#        /* color: #334155; */
-#         text-transform: uppercase;
-#         letter-spacing: 0.5px;
-#     }
-
-#     .report-table-row {
-#         display: grid;
-#         grid-template-columns: 4fr 1.5fr 1.5fr 2fr 1.5fr; /* Match Header */
-#         padding: 12px 15px;
-#         border-bottom: 1px solid #e2e8f0;
-#         align-items: center;
-#         background: white;
-#         transition: background 0.1s;
-#     }
-#     .report-table-row:hover {
-#         background-color: #f8fafc;
-#     }
-    
-#     /* Formal Text Styles */
-#     .tbl-name { font-weight: 700; color: #0f172a; font-size: 16px; }
-#     .tbl-val { font-weight: 700; color: #000000; font-size: 16px; }
-#     .tbl-unit { font-size: 14px; color: #64748b; }
-#     .tbl-range { font-size: 14px; color: #64748b; }
-    
-#     /* Formal Status Text (No Badges) */
-#     .stat-txt-High { color: #dc2626; font-weight: 700; }
-#     .stat-txt-Low { color: #d97706; font-weight: 700; }
-#     .stat-txt-Normal { color: #15803d; font-weight: 600; }
-
-#     /* Category Separator */
-#     .category-header {
-#         background-color: #e2e8f0;
-#         padding: 8px 15px;
-#         font-weight: 800;
-#         font-size: 14px;
-#        /* color: #475569; */
-#         border-bottom: 1px solid #cbd5e1;
-#         margin-top: 0px;
-#     }
-
-#     /* 5. BUTTONS (FIXED VISIBILITY FOR BOTH REGULAR AND FORM BUTTONS) */
-#     div[data-testid="stButton"] button,
-#     div[data-testid="stFormSubmitButton"] button {
-#         background: #2563eb !important; /* Bright Blue */
-#         /*color: white !important; */        /* White Text */
-#         border: none !important;
-#         padding: 0.6rem 1.2rem !important;
-#         border-radius: 8px !important;
-#         font-weight: 700 !important;
-#         width: 100% !important;
-#         font-size: 16px !important;
-#     }
-#     div[data-testid="stButton"] button p,
-#     div[data-testid="stFormSubmitButton"] button p {
-#         color: white !important;
-#     }
-#     div[data-testid="stButton"] button:hover,
-#     div[data-testid="stFormSubmitButton"] button:hover {
-#         background: #1e40af !important;
-#     }
-
-#     /* 6. INFO BOX & ALERTS (FIXED READABILITY) */
-#     .info-box-contrast {
-#         background-color: white;
-#         border: 2px solid #3b82f6; 
-#         padding: 20px;
-#         border-radius: 10px;
-#         /*color: #0f172a;*/
-#     }
-#     .info-box-contrast h5 { color: #1e40af !important; font-weight: 800; font-size: 20px; }
-#     .info-box-contrast p { color: #334155 !important; font-size: 18px; }
-
-#     /* Force Error/Warning Text to be Black */
-#     div[data-testid="stAlert"] { color: #000000 !important; }
-#     div[data-testid="stAlert"] p { color: #000000 !important; font-weight: 600 !important; }
-
-#     /* ============================================================ */
-#     /* 👇 NEW FIXES: Force specific missing elements to be DARK 👇 */
-#     /* ============================================================ */
-
-#     /* 1. Make TAB Text (Edit, Add, Delete) Dark */
-#     button[data-baseweb="tab"] div p {
-#        /* color: #0f172a !important;*/ 
-#         font-weight: 800 !important;
-#     }
-    
-#     /* 2. FORCE ALL INPUT LABELS TO BE DARK (Name, Age, Val, Unit, Range) */
-#     label, label *, div[data-testid="stWidgetLabel"] p {
-#         /*color: #0f172a !important; */
-#         font-weight: 800 !important;
-#     }
-
-#     /* 3. Make PATIENT HEADER Text (Age, Gender) Dark */
-#     .patient-header-text {
-#         /*color: #000000 !important;*/
-#         font-weight: 700;
-#     }
-            
-
-#     /* 4. FORCE SIDEBAR MENU TEXT BACK TO WHITE */
-#     section[data-testid="stSidebar"] label,
-#     section[data-testid="stSidebar"] label *,
-#     section[data-testid="stSidebar"] p,
-#     section[data-testid="stSidebar"] span {
-#         /*color: #ffffff !important;*/
-#         font-weight: 600 !important;
-#     }
-            
-
-#     /* ========================================== */
-#     /* 👇 FINAL FIXES FOR EXPANDER & SIDEBAR 👇   */
-#     /* ========================================== */
-
-#     /* 1. Force the Expander Title ("Modify Records") to be Dark */
-#     div[data-testid="stExpander"] summary p,
-#     div[data-testid="stExpander"] summary span,
-#     summary p {
-#         /*color: #0f172a !important;*/ /* Dark Blue/Black */
-#         font-weight: 800 !important;
-#         font-size: 18px !important;
-#     }
-
-#     /* 2. Force Sidebar Menu Text to be Bright White */
-#     section[data-testid="stSidebar"] div[data-testid="stRadio"] p,
-#     section[data-testid="stSidebar"] label p {
-#         /*color: #ffffff !important;*/
-#         font-weight: 700 !important;
-#         opacity: 1 !important; /* Removes Streamlit's default dimming */
-#     }
-            
-
-#     /* ============================================================ */
-#     /* 👇 NEW FIXES: Force specific missing elements to be DARK 👇 */
-#     /* ============================================================ */
-
-#     /* 1. Make TAB Text (Edit, Add, Delete) Dark */
-#     button[data-baseweb="tab"] * {
-#         /*color: #0f172a !important;*/ 
-#         font-weight: 800 !important;
-#     }
-#     button[data-baseweb="tab"][aria-selected="true"] * {
-#         /*color: #2563eb !important; */
-#     }
-    
-#     /* 2. FORCE ALL INPUT LABELS TO BE DARK (Name, Age, Val, Unit, Range) */
-#     div[data-testid="stVerticalBlock"] label *, div[data-testid="stForm"] label * {
-#         /*color: #0f172a !important;*/ 
-#         font-weight: 800 !important;
-#     }
-
-#     /* 3. Make PATIENT HEADER Text (Age, Gender) Dark */
-#     .patient-header-text, .patient-header-text * {
-#         /*color: #000000 !important;*/
-#         font-weight: 800 !important;
-#     }
-            
-#     /* 4. FORCE SIDEBAR MENU TEXT BACK TO WHITE */
-#     section[data-testid="stSidebar"] label * {
-#         /*color: #ffffff !important;*/
-#         font-weight: 600 !important;
-#     }
-            
-#     /* 5. Force the Expander Title ("Modify Records") to be Dark */
-#     div[data-testid="stExpander"] summary * {
-#         /* color: #0f172a !important; */
-#         font-weight: 800 !important;
-#     }
-            
-
-
-
-
-
-#     /* 7. CUSTOM INSTANT TOOLTIP */
-#     .tbl-name {
-#         position: relative;
-#         display: inline-block;
-#     }
-    
-#     .tbl-name .tooltiptext {
-#         visibility: hidden;
-#         background-color: #374151; /* Dark gray exactly like your screenshot */
-#         /* color: #ffffff !important;*/
-#         text-align: center;
-#         border-radius: 6px;
-#         padding: 6px 12px;
-#         font-size: 13px;
-#         font-weight: 600 !important;
-#         position: absolute;
-#         z-index: 50;
-#         bottom: 120%; /* Positions it right above the text */
-#         left: 0;
-#         opacity: 0;
-#         transition: opacity 0.2s ease-in-out;
-#         white-space: nowrap;
-#         box-shadow: 0px 4px 6px rgba(0,0,0,0.1);
-#     }
-
-#     .tbl-name:hover .tooltiptext {
-#         visibility: visible;
-#         opacity: 1;
-#     }
-
-# </style>
-# """, unsafe_allow_html=True)
-
-
-# # --- 🎨 PRO MEDICAL DESIGN SYSTEM (AUTO-ADAPTIVE) ---
-# st.markdown("""
-# <style>
-#     @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap');
-    
-#     /* 1. GLOBAL SETTINGS */
-#     html, body {
-#         font-family: 'Manrope', sans-serif;
-#         font-size: 16px; 
-#     }
-
-#     /* 2. DASHBOARD CARDS (Adaptive Background) */
-#     .stat-card {
-#         padding: 25px;
-#         border-radius: 16px;
-#         box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-#         border: 1px solid rgba(128, 128, 128, 0.2); /* Soft transparent border */
-#         transition: all 0.3s ease;
-#     }
-#     .stat-card:hover { transform: translateY(-5px); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2); }
-#     .stat-val { font-size: 40px; font-weight: 800; }
-#     .stat-label { font-size: 16px; font-weight: 600; text-transform: uppercase; opacity: 0.7; }
-
-#     /* 3. CLINICAL REPORTS (FORMAL TABLE DESIGN) */
-#     .report-table-header {
-#         display: grid;
-#         grid-template-columns: 4fr 1.5fr 1.5fr 2fr 1.5fr;
-#         background-color: rgba(128, 128, 128, 0.15); /* Adapts to both light/dark */
-#         padding: 12px 15px;
-#         border-bottom: 2px solid rgba(128, 128, 128, 0.5);
-#         margin-top: 15px;
-#     }
-#     .header-item {
-#         font-size: 14px;
-#         font-weight: 800;
-#         text-transform: uppercase;
-#         letter-spacing: 0.5px;
-#     }
-
-#     .report-table-row {
-#         display: grid;
-#         grid-template-columns: 4fr 1.5fr 1.5fr 2fr 1.5fr;
-#         padding: 12px 15px;
-#         border-bottom: 1px solid rgba(128, 128, 128, 0.2);
-#         align-items: center;
-#         transition: background 0.1s;
-#     }
-#     .report-table-row:hover {
-#         background-color: rgba(128, 128, 128, 0.1);
-#     }
-    
-#     /* Formal Text Styles */
-#     .tbl-name { font-weight: 700; font-size: 16px; }
-#     .tbl-val { font-weight: 700; font-size: 16px; }
-#     .tbl-unit, .tbl-range { font-size: 14px; opacity: 0.8; }
-    
-#     /* Formal Status Text (Kept hardcoded because Red/Green is universal) */
-#     .stat-txt-High { color: #ff4b4b !important; font-weight: 700; } /* Brighter red for visibility */
-#     .stat-txt-Low { color: #faca2b !important; font-weight: 700; }  /* Brighter yellow/orange */
-#     .stat-txt-Normal { color: #21c354 !important; font-weight: 600; } /* Brighter green */
-
-#     /* Category Separator */
-#     .category-header {
-#         background-color: rgba(128, 128, 128, 0.2);
-#         padding: 8px 15px;
-#         font-weight: 800;
-#         font-size: 14px;
-#         border-bottom: 1px solid rgba(128, 128, 128, 0.4);
-#         margin-top: 0px;
-#     }
-
-#     /* 4. BUTTONS (Explicit colors are fine here) */
-#     div[data-testid="stButton"] button,
-#     div[data-testid="stFormSubmitButton"] button {
-#         background: #2563eb !important; 
-#         border: none !important;
-#         padding: 0.6rem 1.2rem !important;
-#         border-radius: 8px !important;
-#         font-weight: 700 !important;
-#         width: 100% !important;
-#         font-size: 16px !important;
-#     }
-#     div[data-testid="stButton"] button p,
-#     div[data-testid="stFormSubmitButton"] button p {
-#         color: white !important; /* Always white text on blue button */
-#     }
-#     div[data-testid="stButton"] button:hover,
-#     div[data-testid="stFormSubmitButton"] button:hover {
-#         background: #1e40af !important;
-#     }
-
-#     /* 5. INFO BOX & ALERTS */
-#     .info-box-contrast {
-#         border: 2px solid #3b82f6; 
-#         padding: 20px;
-#         border-radius: 10px;
-#     }
-#     .info-box-contrast h5 { color: #3b82f6 !important; font-weight: 800; font-size: 20px; }
-#     .info-box-contrast p { font-size: 18px; }
-
-#     /* 6. STRUCTURAL WEIGHT FIXES */
-#     button[data-baseweb="tab"] * { font-weight: 800 !important; }
-#     div[data-testid="stVerticalBlock"] label *, div[data-testid="stForm"] label * { font-weight: 800 !important; }
-#     .patient-header-text, .patient-header-text * { font-weight: 800 !important; }
-#     section[data-testid="stSidebar"] label * { font-weight: 600 !important; }
-#     div[data-testid="stExpander"] summary * { font-weight: 800 !important; }
-
-#     /* 7. CUSTOM INSTANT TOOLTIP */
-#     .tbl-name {
-#         position: relative;
-#         display: inline-block;
-#     }
-#     .tbl-name .tooltiptext {
-#         visibility: hidden;
-#         background-color: #374151; 
-#         color: #ffffff !important; /* Explicitly white so it shows on the dark tooltip background */
-#         text-align: center;
-#         border-radius: 6px;
-#         padding: 6px 12px;
-#         font-size: 13px;
-#         font-weight: 600 !important;
-#         position: absolute;
-#         z-index: 50;
-#         bottom: 120%; 
-#         left: 0;
-#         opacity: 0;
-#         transition: opacity 0.2s ease-in-out;
-#         white-space: nowrap;
-#         box-shadow: 0px 4px 6px rgba(0,0,0,0.3);
-#     }
-#     .tbl-name:hover .tooltiptext {
-#         visibility: visible;
-#         opacity: 1;
-#     }
-# </style>
-# """, unsafe_allow_html=True)
-
-
-# # --- POSITION: Top of app.py ---
-# st.markdown("""
-#     <style>
-#     /* 1. Make the Expander itself transparent */
-#     .stSidebar [data-testid="stExpander"] {
-#         border: none !important;
-#         background-color: transparent !important;
-#         box-shadow: none !important;
-#     }
-
-#     /* 2. Format the "SYSTEM ADMIN" title */
-#     .stSidebar [data-testid="stExpander"] summary p {
-#         font-size: 15px !important;
-#         /*color: #94a3b8 !important;*/
-#         text-transform: uppercase;
-#         font-weight: bold;
-#     }
-
-#     /* 3. Remove default Streamlit gaps between items */
-#     .stSidebar [data-testid="stExpanderDetails"] {
-#         display: flex;
-#         flex-direction: column;
-#         gap: 0px !important;
-#         padding-top: 0px !important;
-#         padding-bottom: 5px !important;
-#     }
-
-#     /* 4. Turn bulky buttons into a tight text list */
-#     .stSidebar [data-testid="stExpanderDetails"] button {
-#         background-color: transparent !important; 
-#         border: none !important;                  
-#         box-shadow: none !important;              
-#        /* color: #cbd5e1 !important; */                
-#         justify-content: flex-start !important;   
-#         text-align: left !important;
-#         width: 100% !important;
-#         padding: 4px 10px !important;             
-#         font-size: 13px !important;
-#         margin: 0px !important;
-#         min-height: 28px !important;
-#     }
-
-#     /* 5. Subtle hover effect for the list items */
-#     .stSidebar [data-testid="stExpanderDetails"] button:hover {
-#         background-color: rgba(255, 255, 255, 0.08) !important; 
-#        /* color: #ffffff !important; */
-#         border-radius: 4px !important;
-#     }
-
-#     /* 6. 🔥 TARGET THE CORRECT "stAlert" BOX TO FORCE 1-LINE */
-#     .stSidebar [data-testid="stAlert"] {
-#         padding: 2px 8px !important; /* Shrink the outer box */
-#         min-height: 20px !important;
-#         margin-bottom: 5px !important;
-#         width: 100% !important;
-#     }
-    
-#     /* Force the text inside the alert to stay on one line */
-#     .stSidebar [data-testid="stAlert"] div,
-#     .stSidebar [data-testid="stAlert"] p,
-#     .stSidebar [data-testid="stAlert"] span {
-#         white-space: nowrap !important; 
-#         font-size: 15px !important;     
-#         margin: 0px !important;
-#         padding: 0px !important;
-#         line-height: 1.5 !important;
-#     }
-#     </style>
-# """, unsafe_allow_html=True)
 
 # --- 🎨 PRO MEDICAL DESIGN SYSTEM (AUTO-ADAPTIVE) ---
 st.markdown("""
@@ -947,7 +487,8 @@ elif menu == "👥 Patient Registry":
                         del st.session_state["confirm_delete_pid"]
                         st.rerun()
 
-                      
+        
+
 # # =========================================================
 # # 3. CLINICAL REPORTS (FORMAL TABLE DESIGN)
 # # =========================================================
@@ -968,6 +509,8 @@ elif menu == "👥 Patient Registry":
 #     # --- PREPARE PDF VIEWER & EYE ICON ---
 #     import os
 #     import base64
+#     import io
+#     import pandas as pd
     
 #     pdf_html = ""
 #     results = get_patient_report(pid)
@@ -976,18 +519,29 @@ elif menu == "👥 Patient Registry":
 #         latest_date = results[0][1]
 #         safe_date = latest_date.replace("/", "-")
         
+#         # 👇 NEW: GENERATE EXCEL DATA IN MEMORY FOR THE HTML DOWNLOAD LINK
+#         excel_data = [{"Patient ID": curr[0], "Name": curr[1], "Age": curr[2], "Gender": curr[3], 
+#                        "Test Date": r[1], "Category": r[2], "Test Name": r[3], 
+#                        "Result Value": r[4], "Unit": r[5], "Status": r[7]} for r in results]
+        
+#         buffer = io.BytesIO()
+#         with pd.ExcelWriter(buffer, engine='xlsxwriter') as writer:
+#             pd.DataFrame(excel_data).to_excel(writer, index=False, sheet_name='Patient_Data')
+        
+#         b64_excel = base64.b64encode(buffer.getvalue()).decode()
+#         excel_href = f"data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,{b64_excel}"
+#         download_filename = f"ReportLens_{str(curr[1]).replace(' ', '_')}.xlsx"
+#         # 👆 -----------------------------------------------------------------
+        
 #         pdf_path = None
 #         if os.path.exists("uploaded_reports"):
 #             # 1. Find all files starting with "PatientID_"
 #             matching_files = [f for f in os.listdir("uploaded_reports") if f.startswith(f"{pid}_")]
             
 #             if matching_files:
-#                 # 2. 🔥 Sort by 'File Creation Time' to get the one you JUST uploaded
+#                 # 2. Sort by 'File Creation Time' to get the one you JUST uploaded
 #                 matching_files.sort(key=lambda x: os.path.getmtime(os.path.join("uploaded_reports", x)), reverse=True)
 #                 pdf_path = os.path.join("uploaded_reports", matching_files[0])
-
-#         # Now the eye icon will always open the correct file!
-                
 
 #         if pdf_path:
 #             import os
@@ -1012,7 +566,7 @@ elif menu == "👥 Patient Registry":
 #             except Exception as e:
 #                 viewer_content = f"<div style='padding:20px; color:red; text-align:center;'>Error loading PDF view: {e}</div>"
 
-#             # --- Inject the chosen viewer into your custom Eye Icon Modal ---
+#             # --- Inject the chosen viewer & DOWNLOAD BUTTON into your custom Eye Icon Modal ---
 #             pdf_html = f"""
 # <style>
 #     #modal-toggle {{ display: none; }}
@@ -1020,10 +574,12 @@ elif menu == "👥 Patient Registry":
 #     .modal-content {{ display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 75vw; height: 85vh; background: white; z-index: 99999; border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.5); overflow: hidden; flex-direction: column; }}
 #     #modal-toggle:checked ~ .modal-overlay {{ display: block; }}
 #     #modal-toggle:checked ~ .modal-content {{ display: flex; }}
+#     .icon-hover:hover {{ transform: scale(1.1); transition: 0.2s; }}
 # </style>
 
-# <div style="position:absolute; top:20px; right:20px; z-index:100;">
-#     <label for="modal-toggle" style="cursor:pointer; font-size:28px;" title="View original record">👁️</label>
+# <div style="position:absolute; top:20px; right:20px; z-index:100; display:flex; gap:15px; align-items:center;">
+#     <a href="{excel_href}" download="{download_filename}" style="text-decoration:none; font-size:26px;" class="icon-hover" title="Download Excel Data">📥</a>
+#     <label for="modal-toggle" style="cursor:pointer; font-size:28px;" class="icon-hover" title="View original record">👁️</label>
 # </div>
 
 # <input type="checkbox" id="modal-toggle">
@@ -1052,7 +608,6 @@ elif menu == "👥 Patient Registry":
 #     """, unsafe_allow_html=True)
 
 #     if results:
-#         #results.sort(key=lambda x: (x[2], x[3], x[1]))
 #         # Change Line 539 to this:
 #         results.sort(key=lambda x: (x[2], datetime.datetime.strptime(x[1], '%d-%m-%y'), x[3]), reverse=True)
 #         # --- FORMAL HEADER ---
@@ -1065,8 +620,6 @@ elif menu == "👥 Patient Registry":
 #             <div class="header-item">Status</div>
 #         </div>
 #         """, unsafe_allow_html=True)
-
-       
 
 #         curr_cat = None
 #         for row in results:
@@ -1127,8 +680,8 @@ elif menu == "👥 Patient Registry":
 #                 if st.button("🗑️ Request Delete"): st.session_state["confirm_delete_rid"] = rmap[dk][0]; st.rerun()
 #                 if st.session_state.get("confirm_delete_rid") == rmap[dk][0]:
 #                     if st.button("✅ Confirm Delete"): delete_test_record(rmap[dk][0]); del st.session_state["confirm_delete_rid"]; st.rerun()
-#                     if st.button("❌ Cancel"): del st.session_state["confirm_delete_rid"]; st.rerun()
 
+#                     if st.button("❌ Cancel"): del st.session_state["confirm_delete_rid"]; st.rerun()
 
 
 # =========================================================
@@ -1161,15 +714,48 @@ elif menu == "📄 Clinical Reports":
         latest_date = results[0][1]
         safe_date = latest_date.replace("/", "-")
         
-        # 👇 NEW: GENERATE EXCEL DATA IN MEMORY FOR THE HTML DOWNLOAD LINK
+        # 👇 NEW: GENERATE 2-SHEET EXCEL DATA IN MEMORY FOR THE HTML DOWNLOAD LINK
         excel_data = [{"Patient ID": curr[0], "Name": curr[1], "Age": curr[2], "Gender": curr[3], 
                        "Test Date": r[1], "Category": r[2], "Test Name": r[3], 
                        "Result Value": r[4], "Unit": r[5], "Status": r[7]} for r in results]
         
+        # 1. Convert to DataFrame
+        df = pd.DataFrame(excel_data)
+        
+        # 2. Prepare the Wide Format (Sheet 1)
+        df_temp = df.copy()
+        df_temp['Test Header'] = df_temp['Test Name'].astype(str) + " (" + df_temp['Unit'].astype(str) + ")"
+        
+        # 3. Write BOTH sheets into the buffer using xlsxwriter
         buffer = io.BytesIO()
         with pd.ExcelWriter(buffer, engine='xlsxwriter') as writer:
-            pd.DataFrame(excel_data).to_excel(writer, index=False, sheet_name='Patient_Data')
+            
+            # --- SHEET 1: Separate Tables Per Date ---
+            start_row = 0
+            unique_dates = df_temp['Test Date'].unique()
+            
+            for date in unique_dates:
+                # Filter data for this specific date only
+                df_date = df_temp[df_temp['Test Date'] == date]
+                
+                # Pivot only this date's data
+                df_wide = df_date.pivot_table(
+                    index=['Patient ID', 'Name', 'Age', 'Gender', 'Test Date'], 
+                    columns='Test Header', 
+                    values='Result Value', 
+                    aggfunc='first'
+                ).reset_index()
+                
+                # Write this date's table
+                df_wide.to_excel(writer, sheet_name='Patient_Summary', startrow=start_row, index=False)
+                
+                # Move cursor down for next table (header + data + 3 blank rows)
+                start_row += len(df_wide) + 4 
+                
+            # --- SHEET 2: Raw Data (Unchanged) ---
+            df.to_excel(writer, sheet_name='Raw_Data', index=False)
         
+        # 4. Encode for Streamlit HTML Download
         b64_excel = base64.b64encode(buffer.getvalue()).decode()
         excel_href = f"data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,{b64_excel}"
         download_filename = f"ReportLens_{str(curr[1]).replace(' ', '_')}.xlsx"
@@ -1236,7 +822,7 @@ elif menu == "📄 Clinical Reports":
 </div>
             """
 
-    # Patient Banner (Injecting the HTML correctly with .strip() to remove extra spaces)
+    # Patient Banner
     st.markdown(f"""
     <div style="position:relative; background:#f1f5f9; padding:20px; border-radius:12px; border-left:6px solid #4f46e5; margin-bottom:20px;">
         <h2 style="margin:0; color:#000000; font-weight:800; font-size:32px">{curr[1]}</h2>
@@ -1250,8 +836,9 @@ elif menu == "📄 Clinical Reports":
     """, unsafe_allow_html=True)
 
     if results:
-        # Change Line 539 to this:
+        import datetime
         results.sort(key=lambda x: (x[2], datetime.datetime.strptime(x[1], '%d-%m-%y'), x[3]), reverse=True)
+        
         # --- FORMAL HEADER ---
         st.markdown("""
         <div class="report-table-header">
@@ -1277,7 +864,7 @@ elif menu == "📄 Clinical Reports":
             if status == "High": status_cls = "stat-txt-High"
             elif status == "Low": status_cls = "stat-txt-Low"
             
-            # --- POSITION C: Table Row (Added Date into the Name Column) ---
+            # --- POSITION C: Table Row ---
             st.markdown(f"""
             <div class="report-table-row">
                 <div class="tbl-name">
@@ -1311,8 +898,9 @@ elif menu == "📄 Clinical Reports":
                         r = c1.text_input("Range", rec[6]); s = c2.selectbox("Status", ["Normal", "High", "Low", "N/A"], index=0)
                         if st.form_submit_button("💾 Update"): update_test_record(rec[0], v, u, r, s); st.rerun()
         with t2:
+            import datetime
             with st.form("ad"):
-                d = st.text_input("Date", str(datetime.date.today())); cat = st.text_input("Cat", "HEMATOLOGY"); nm = st.text_input("Name")
+                d = st.text_input("Date", str(datetime.date.today().strftime('%d-%m-%y'))); cat = st.text_input("Cat", "HEMATOLOGY"); nm = st.text_input("Name")
                 c1, c2 = st.columns(2)
                 v = c1.text_input("Val"); u = c2.text_input("Unit"); r = c1.text_input("Range"); s = c2.selectbox("Status", ["Normal", "High", "Low"])
                 if st.form_submit_button("💾 Add Record"): add_manual_test_record(pid, d, cat, nm, v, u, r, s); st.rerun()
